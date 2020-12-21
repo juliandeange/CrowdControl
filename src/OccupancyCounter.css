@@ -2,6 +2,11 @@
   text-align: center;
 }
 
+.Submit-button {
+    background-color: rgb(177, 0, 231);
+    padding-top: 20px;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
