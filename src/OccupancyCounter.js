@@ -37,12 +37,12 @@ const styles = {
 
 function test() {
 
-    firebase.firestore().collection("StoreCounts").doc("AAA002").get().then((querySnapshot) => {
-        console.log(querySnapshot.data())
-        // querySnapshot.map((doc) => {
-        //     console.log(`${doc.id} => ${doc.data()}`);
-        // });
-    });
+    // firebase.firestore().collection("StoreCounts").doc("AAA002").get().then((querySnapshot) => {
+    //     console.log(querySnapshot.data())
+    //     // querySnapshot.map((doc) => {
+    //     //     console.log(`${doc.id} => ${doc.data()}`);
+    //     // });
+    // });
 
     // db.collection("StoreCounts")
     // .doc('AAA001')
@@ -76,7 +76,17 @@ class OccupancyCounter extends React.Component {
 
     connectButtonClicked() {
 
-        console.log(this.state.storeCode)
+        if (this.state.storeCode === "")
+            return;
+
+        firebase.firestore().collection("StoreCounts").doc(this.state.storeCode).get().then((query) => {
+
+            if (query !== undefined) {
+                console.log(query.data())
+            }
+
+            
+        });
     
     }
 
