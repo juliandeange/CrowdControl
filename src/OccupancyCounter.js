@@ -63,15 +63,29 @@ class OccupancyCounter extends React.Component {
 
             storeCode: "",
             isValid: true,
-            count: "-"
+            count: 0,
+            connectedTo: ""
 
         }
+    }
+
+    beginInterval() {
+
+    }
+    
+    endInterval() {
+        
+    }
+
+    componentDidMount() {
+
+
     }
 
     storeCodeChanged = (e) => {
 
         this.setState({ 
-            storeCode:  e.target.value,
+            storeCode:  e.target.value.toUpperCase(),
             isValid: true
         })
 
@@ -79,13 +93,20 @@ class OccupancyCounter extends React.Component {
 
     connectButtonClicked() {
 
-        if (this.state.storeCode === "")
+        if (this.state.storeCode === "") {
+            this.setState({ isValid: false })
             return;
+        }
+            
 
         firebase.firestore().collection("StoreCounts").doc(this.state.storeCode).get().then((query) => {
 
             if (query.data() !== undefined) {
                 console.log(query.data())
+                this.setState({ 
+                    connectedTo: this.state.storeCode,
+                    count: query.data().count
+                })
             }
             else {
                 this.setState({ isValid: false })
@@ -94,6 +115,12 @@ class OccupancyCounter extends React.Component {
             
         });
     
+    }
+
+    createButtonClicked() {
+
+
+
     }
 
     
@@ -128,7 +155,6 @@ class OccupancyCounter extends React.Component {
                             id="outlined-error"
                             label="Enter Store Code"
                             helperText={this.state.isValid ? "" : "Invalid Store Code"}
-                            defaultValue="ABC123"
                             variant="outlined"
                             value={this.state.storeCode}
                             onChange={this.storeCodeChanged} 
@@ -140,10 +166,11 @@ class OccupancyCounter extends React.Component {
                             style={styles.submitButton}
                             variant="contained"
                             size="large"
-                            onClick={test}>
+                            onClick={this.createButtonClicked.bind(this)}>
                             Create
                         </Button>
-                    </Grid><Grid item xs={12} style={{textAlign: "center"}}>
+                    </Grid>
+                    <Grid item xs={12} style={{textAlign: "center"}}>
                         <Button   
                             color="primary"
                             style={styles.submitButton}
@@ -167,7 +194,6 @@ class OccupancyCounter extends React.Component {
                         </IconButton>
 
                     </Grid>
-
                 </Grid>
             </div>
         )
