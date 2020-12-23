@@ -71,24 +71,25 @@ class OccupancyCounter extends React.Component {
 
     beginInterval() {
 
-    }
-    
-    endInterval() {
+        this.interval = setInterval(() => 
         
-    }
+        firebase.firestore().collection("StoreCounts").doc(this.state.connectedTo).get().then((query) => { 
 
-    componentDidMount() {
+            this.setState({
+                count: query.data().count
+            })
 
+        })
+
+        , 500);
 
     }
 
     storeCodeChanged = (e) => {
-
         this.setState({ 
             storeCode:  e.target.value.toUpperCase(),
             isValid: true
         })
-
     }
 
     connectButtonClicked() {
@@ -102,11 +103,12 @@ class OccupancyCounter extends React.Component {
         firebase.firestore().collection("StoreCounts").doc(this.state.storeCode).get().then((query) => {
 
             if (query.data() !== undefined) {
-                console.log(query.data())
+                // console.log(query.data())
                 this.setState({ 
                     connectedTo: this.state.storeCode,
                     count: query.data().count
                 })
+                this.beginInterval();
             }
             else {
                 this.setState({ isValid: false })
@@ -117,8 +119,24 @@ class OccupancyCounter extends React.Component {
     
     }
 
-    createButtonClicked() {
+    disconnectButtonClicked() {
+        clearInterval(this.interval)
+    }
 
+    upArrowClicked() {
+
+        
+
+    }
+
+    downArrowClicked() {
+
+
+
+    }
+
+
+    createButtonClicked() {
 
 
     }
@@ -179,17 +197,26 @@ class OccupancyCounter extends React.Component {
                             onClick={this.connectButtonClicked.bind(this)}>
                             Connect
                         </Button>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <Button
+                            color="secondary"
+                            style={styles.submitButton}
+                            variant="contained"
+                            size="large"
+                            onClick={this.disconnectButtonClicked.bind(this)}>
+                            Disconnect
+                        </Button>
                     </Grid>
 
                     <Grid item xs={12} style={{textAlign: "center"}}>
 
-                        <IconButton>
+                        <IconButton onClick={this.upArrowClicked.bind(this)}>
                             <KeyboardArrowUpIcon style={styles.arrowSize}/>
                         </IconButton>
                         <h1>
                             {this.state.count}
                         </h1>
-                        <IconButton>
+                        <IconButton onClick={this.downArrowClicked.bind(this)}>
                             <KeyboardArrowDownIcon style={styles.arrowSize} />
                         </IconButton>
 
