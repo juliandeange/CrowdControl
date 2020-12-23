@@ -70,7 +70,10 @@ class OccupancyCounter extends React.Component {
 
     storeCodeChanged = (e) => {
 
-        this.setState({ storeCode:  e.target.value})
+        this.setState({ 
+            storeCode:  e.target.value,
+            isValid: true
+        })
 
     }
 
@@ -81,8 +84,11 @@ class OccupancyCounter extends React.Component {
 
         firebase.firestore().collection("StoreCounts").doc(this.state.storeCode).get().then((query) => {
 
-            if (query !== undefined) {
+            if (query.data() !== undefined) {
                 console.log(query.data())
+            }
+            else {
+                this.setState({ isValid: false })
             }
 
             
@@ -121,6 +127,7 @@ class OccupancyCounter extends React.Component {
                             error={!this.state.isValid}
                             id="outlined-error"
                             label="Enter Store Code"
+                            helperText={this.state.isValid ? "" : "Invalid Store Code"}
                             defaultValue="ABC123"
                             variant="outlined"
                             value={this.state.storeCode}
