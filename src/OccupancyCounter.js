@@ -1,11 +1,13 @@
 import React from 'react'
+import firebase from 'firebase';
+
+import "./firestore";
 
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
 import HomeIcon from '@material-ui/icons/Home';
-import db from "./firestore";
 
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
@@ -35,15 +37,20 @@ const styles = {
 
 function test() {
 
-    console.log("hello")
-
-    db.collection("StoreCounts")
-    .doc('AAA001')
-    .get()
-    .then(doc => {
-        const data = doc.data();
-        console.log(data); // LA city object with key-value pair
+    firebase.firestore().collection("StoreCounts").doc("AAA002").get().then((querySnapshot) => {
+        console.log(querySnapshot.data())
+        // querySnapshot.map((doc) => {
+        //     console.log(`${doc.id} => ${doc.data()}`);
+        // });
     });
+
+    // db.collection("StoreCounts")
+    // .doc('AAA001')
+    // .get()
+    // .then(doc => {
+    //     const data = doc.data();
+    //     console.log(data); // LA city object with key-value pair
+    // });
 
 }
 
@@ -54,10 +61,23 @@ class OccupancyCounter extends React.Component {
         super(props);
         this.state = {
 
+            storeCode: "",
             isValid: true,
             count: "-"
 
         }
+    }
+
+    storeCodeChanged = (e) => {
+
+        this.setState({ storeCode:  e.target.value})
+
+    }
+
+    connectButtonClicked() {
+
+        console.log(this.state.storeCode)
+    
     }
 
     
@@ -69,8 +89,6 @@ class OccupancyCounter extends React.Component {
         return(
 
             <div>
-
-                
                 
                 {/* // position: 'absolute', 
                 // left: '50%', 
@@ -82,11 +100,6 @@ class OccupancyCounter extends React.Component {
 
                 <Grid container spacing={3}>
 
-                    {/* <Grid item xs={1}>
-                        <IconButton>
-                    <HomeIcon />
-                        </IconButton>
-                    </Grid> */}
                     <Grid item xs={12}>
                         <h2 style={{textAlign: "center"}}>Occupancy Counter</h2>
                     </Grid>
@@ -100,6 +113,8 @@ class OccupancyCounter extends React.Component {
                             label="Enter Store Code"
                             defaultValue="ABC123"
                             variant="outlined"
+                            value={this.state.storeCode}
+                            onChange={this.storeCodeChanged} 
                         /> 
                     </Grid>
                     <Grid item xs={12} style={{textAlign: "center"}}>
@@ -117,7 +132,7 @@ class OccupancyCounter extends React.Component {
                             style={styles.submitButton}
                             variant="contained"
                             size="large"
-                            onClick={test}>
+                            onClick={this.connectButtonClicked.bind(this)}>
                             Connect
                         </Button>
                     </Grid>
