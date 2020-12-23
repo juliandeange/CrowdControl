@@ -5,6 +5,7 @@ import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
 import HomeIcon from '@material-ui/icons/Home';
+import db from "./firestore";
 
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
@@ -35,6 +36,14 @@ const styles = {
 function test() {
 
     console.log("hello")
+
+    db.collection("StoreCounts")
+    .doc('AAA001')
+    .get()
+    .then(doc => {
+        const data = doc.data();
+        console.log(data); // LA city object with key-value pair
+    });
 
 }
 
