@@ -125,16 +125,23 @@ class OccupancyCounter extends React.Component {
 
     upArrowClicked() {
 
-        
+        var connectedStore = firebase.firestore().collection("StoreCounts").doc(this.state.connectedTo);
+
+        return connectedStore.update({
+            count: this.state.count + 1
+        })
 
     }
 
     downArrowClicked() {
 
+        var connectedStore = firebase.firestore().collection("StoreCounts").doc(this.state.connectedTo);
 
+        return connectedStore.update({
+            count: this.state.count - 1
+        })
 
     }
-
 
     createButtonClicked() {
 
