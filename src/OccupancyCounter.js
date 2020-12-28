@@ -2,6 +2,7 @@ import React from 'react'
 import firebase from 'firebase';
 
 import "./firestore";
+import { FirebaseDatabaseProvider } from "@react-firebase/database";
 
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
@@ -35,25 +36,6 @@ const styles = {
 
 }
 
-function test() {
-
-    // firebase.firestore().collection("StoreCounts").doc("AAA002").get().then((querySnapshot) => {
-    //     console.log(querySnapshot.data())
-    //     // querySnapshot.map((doc) => {
-    //     //     console.log(`${doc.id} => ${doc.data()}`);
-    //     // });
-    // });
-
-    // db.collection("StoreCounts")
-    // .doc('AAA001')
-    // .get()
-    // .then(doc => {
-    //     const data = doc.data();
-    //     console.log(data); // LA city object with key-value pair
-    // });
-
-}
-
 class OccupancyCounter extends React.Component {
 
     constructor(props) {
@@ -81,7 +63,7 @@ class OccupancyCounter extends React.Component {
 
         })
 
-        , 500);
+        , 1);
 
     }
 
@@ -93,6 +75,26 @@ class OccupancyCounter extends React.Component {
     }
 
     connectButtonClicked() {
+
+        // var r = firebase.database().ref("AAA002").on("value", snapshot => {
+
+        //     snapshot.forEach(snap => {
+        //         // allNotes.push(snap.val());
+        //         console.log(snap.val())
+        //       });
+
+        //  })
+
+        //Add Node
+        //  var s = firebase.database().ref("AAA002").push(0);
+
+        //Delete Node
+        // firebase.database().ref("AAA002/").on("value", snapshot => {
+
+        //     console.log(snapshot)
+
+        // })
+        // var t = firebase.database().ref("AAA002/-MP_CqyrupANbV6MMRnn").remove()
 
         if (this.state.storeCode === "") {
             this.setState({ isValid: false })
@@ -156,79 +158,81 @@ class OccupancyCounter extends React.Component {
 
         return(
 
+
             <div>
-                
-                {/* // position: 'absolute', 
-                // left: '50%', 
-                // top: '50%', 
-                // transform: 'translate(-50%, -50%)',
-                // display: 'flex',
-                // height: "100vh", 
-                // width: "100%" */}
+                    
+                    {/* // position: 'absolute', 
+                    // left: '50%', 
+                    // top: '50%', 
+                    // transform: 'translate(-50%, -50%)',
+                    // display: 'flex',
+                    // height: "100vh", 
+                    // width: "100%" */}
 
-                <Grid container spacing={3}>
+                    <Grid container spacing={3}>
 
-                    <Grid item xs={12}>
-                        <h2 style={{textAlign: "center"}}>Occupancy Counter</h2>
-                    </Grid>
-                    <Grid item xs={12}></Grid>
-                    <Grid item xs={12}></Grid>
-                    <Grid item xs={12} style={{textAlign: "center"}}>
-                        <TextField
-                            style={styles.componentDimensions}
-                            error={!this.state.isValid}
-                            id="outlined-error"
-                            label="Enter Store Code"
-                            helperText={this.state.isValid ? "" : "Invalid Store Code"}
-                            variant="outlined"
-                            value={this.state.storeCode}
-                            onChange={this.storeCodeChanged} 
-                        /> 
-                    </Grid>
-                    <Grid item xs={12} style={{textAlign: "center"}}>
-                        <Button   
-                            color="primary"
-                            style={styles.submitButton}
-                            variant="contained"
-                            size="large"
-                            onClick={this.createButtonClicked.bind(this)}>
-                            Create
-                        </Button>
-                    </Grid>
-                    <Grid item xs={12} style={{textAlign: "center"}}>
-                        <Button   
-                            color="primary"
-                            style={styles.submitButton}
-                            variant="contained"
-                            size="large"
-                            onClick={this.connectButtonClicked.bind(this)}>
-                            Connect
-                        </Button>
-                        &nbsp;&nbsp;&nbsp;&nbsp;
-                        <Button
-                            color="secondary"
-                            style={styles.submitButton}
-                            variant="contained"
-                            size="large"
-                            onClick={this.disconnectButtonClicked.bind(this)}>
-                            Disconnect
-                        </Button>
-                    </Grid>
+                        <Grid item xs={12}>
+                            <h2 style={{textAlign: "center"}}>Occupancy Counter</h2>
+                        </Grid>
+                        <Grid item xs={12}></Grid>
+                        <Grid item xs={12}></Grid>
+                        <Grid item xs={12} style={{textAlign: "center"}}>
+                            <TextField
+                                style={styles.componentDimensions}
+                                error={!this.state.isValid}
+                                id="outlined-error"
+                                label="Enter Store Code"
+                                helperText={this.state.isValid ? "" : "Invalid Store Code"}
+                                variant="outlined"
+                                value={this.state.storeCode}
+                                onChange={this.storeCodeChanged} 
+                            /> 
+                        </Grid>
+                        <Grid item xs={12} style={{textAlign: "center"}}>
+                            <Button   
+                                color="primary"
+                                style={styles.submitButton}
+                                variant="contained"
+                                size="large"
+                                onClick={this.createButtonClicked.bind(this)}>
+                                Create
+                            </Button>
+                        </Grid>
+                        <Grid item xs={12} style={{textAlign: "center"}}>
+                            <Button   
+                                color="primary"
+                                style={styles.submitButton}
+                                variant="contained"
+                                size="large"
+                                onClick={this.connectButtonClicked.bind(this)}>
+                                Connect
+                            </Button>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <Button
+                                color="secondary"
+                                style={styles.submitButton}
+                                variant="contained"
+                                size="large"
+                                onClick={this.disconnectButtonClicked.bind(this)}>
+                                Disconnect
+                            </Button>
+                        </Grid>
 
-                    <Grid item xs={12} style={{textAlign: "center"}}>
+                        <Grid item xs={12} style={{textAlign: "center"}}>
 
-                        <IconButton onClick={this.upArrowClicked.bind(this)}>
-                            <KeyboardArrowUpIcon style={styles.arrowSize}/>
-                        </IconButton>
-                        <h1>
-                            {this.state.count}
-                        </h1>
-                        <IconButton onClick={this.downArrowClicked.bind(this)}>
-                            <KeyboardArrowDownIcon style={styles.arrowSize} />
-                        </IconButton>
+                            <IconButton onClick={this.upArrowClicked.bind(this)}>
+                                <KeyboardArrowUpIcon style={styles.arrowSize}/>
+                            </IconButton>
+                            <h1>
+                                {this.state.count}
+                            </h1>
+                            <IconButton onClick={this.downArrowClicked.bind(this)}>
+                                <KeyboardArrowDownIcon style={styles.arrowSize} />
+                            </IconButton>
 
+                        </Grid>
                     </Grid>
-                </Grid>
+                {/* </FirebaseDatabaseNode> */}
             </div>
         )
     }
