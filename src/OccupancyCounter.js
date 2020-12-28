@@ -83,20 +83,20 @@ class OccupancyCounter extends React.Component {
 
     connectButtonClicked() {
 
-        listener = firebase.firestore().collection("StoreCounts").doc("AAA001").onSnapshot({
-            // Listen for document metadata changes
-                includeMetadataChanges: false
-            }, 
-            function(doc) {
-            console.log(doc.data().count)
-        });
-
         if (this.state.storeCode === "") {
             this.setState({ isValid: false })
             return;
         }
-            
 
+        listener = firebase.firestore().collection("StoreCounts").doc("AAA001").onSnapshot({
+            // Listen for document metadata changes
+                includeMetadataChanges: false
+            }, 
+            (doc) => {
+                // console.log(doc.data().count);
+                this.setState({ count: doc.data().count })
+            });
+            
         firebase.firestore().collection("StoreCounts").doc(this.state.storeCode).get().then((query) => {
 
             if (query.data() !== undefined) {
@@ -105,7 +105,7 @@ class OccupancyCounter extends React.Component {
                     connectedTo: this.state.storeCode,
                     count: query.data().count
                 })
-                this.beginInterval();
+                // this.beginInterval();
             }
             else {
                 this.setState({ isValid: false })
