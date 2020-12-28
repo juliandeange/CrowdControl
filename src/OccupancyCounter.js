@@ -13,6 +13,8 @@ import HomeIcon from '@material-ui/icons/Home';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 
+var listener = {};
+
 const styles = {
 
     submitButton: {
@@ -37,6 +39,11 @@ const styles = {
 }
 
 class OccupancyCounter extends React.Component {
+
+    componentDidMount() {
+
+
+    }
 
     constructor(props) {
 
@@ -76,25 +83,13 @@ class OccupancyCounter extends React.Component {
 
     connectButtonClicked() {
 
-        // var r = firebase.database().ref("AAA002").on("value", snapshot => {
-
-        //     snapshot.forEach(snap => {
-        //         // allNotes.push(snap.val());
-        //         console.log(snap.val())
-        //       });
-
-        //  })
-
-        //Add Node
-        //  var s = firebase.database().ref("AAA002").push(0);
-
-        //Delete Node
-        // firebase.database().ref("AAA002/").on("value", snapshot => {
-
-        //     console.log(snapshot)
-
-        // })
-        // var t = firebase.database().ref("AAA002/-MP_CqyrupANbV6MMRnn").remove()
+        listener = firebase.firestore().collection("StoreCounts").doc("AAA001").onSnapshot({
+            // Listen for document metadata changes
+                includeMetadataChanges: false
+            }, 
+            function(doc) {
+            console.log(doc.data().count)
+        });
 
         if (this.state.storeCode === "") {
             this.setState({ isValid: false })
@@ -122,7 +117,11 @@ class OccupancyCounter extends React.Component {
     }
 
     disconnectButtonClicked() {
+
+        listener();
         clearInterval(this.interval)
+        this.setState({connectedTo: ""})
+
     }
 
     upArrowClicked() {
@@ -131,6 +130,7 @@ class OccupancyCounter extends React.Component {
 
         return connectedStore.update({
             count: this.state.count + 1
+            // count: firebase.firestore.FieldValue.increment(1)
         })
 
     }
@@ -154,7 +154,7 @@ class OccupancyCounter extends React.Component {
     render() {
 
         document.body.classList.add("no-sroll")
-        document.body.classList.add('background-red');
+        document.body.classList.add("background-red");
 
         return(
 
