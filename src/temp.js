@@ -17,3 +17,20 @@
         //     })
         // })
         // var t = firebase.database().ref("AAA002/-MP_CqyrupANbV6MMRnn").remove()
+
+
+
+
+
+
+
+                // functions testing
+
+        // var printMessage = firebase.functions().httpsCallable('PrintMessage');
+        // printMessage({ text: "messageText" })
+        // .then((result) => {
+        //     // Read result of the Cloud Function.
+        //     console.log(result.data.text);
+        // });
+
+        //
