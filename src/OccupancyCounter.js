@@ -25,7 +25,6 @@ const styles = {
         // marginTop: 8
     },
 
-    // 55
     componentDimensions: {
         width: 194,
         height: 55
@@ -39,11 +38,6 @@ const styles = {
 }
 
 class OccupancyCounter extends React.Component {
-
-    componentDidMount() {
-
-
-    }
 
     constructor(props) {
 
@@ -92,10 +86,10 @@ class OccupancyCounter extends React.Component {
             // Listen for document metadata changes
                 includeMetadataChanges: false
             }, 
-            (doc) => {
-                // console.log(doc.data().count);
-                this.setState({ count: doc.data().count })
-            });
+        (doc) => {
+            // console.log(doc.data().count);
+            this.setState({ count: doc.data().count })
+        });
             
         firebase.firestore().collection("StoreCounts").doc(this.state.storeCode).get().then((query) => {
 
@@ -129,8 +123,8 @@ class OccupancyCounter extends React.Component {
         var connectedStore = firebase.firestore().collection("StoreCounts").doc(this.state.connectedTo);
 
         return connectedStore.update({
-            count: this.state.count + 1
-            // count: firebase.firestore.FieldValue.increment(1)
+            // count: this.state.count + 1
+            count: firebase.firestore.FieldValue.increment(1)
         })
 
     }
@@ -140,7 +134,8 @@ class OccupancyCounter extends React.Component {
         var connectedStore = firebase.firestore().collection("StoreCounts").doc(this.state.connectedTo);
 
         return connectedStore.update({
-            count: this.state.count - 1
+            // count: this.state.count - 1
+            count: firebase.firestore.FieldValue.increment(-1)
         })
 
     }
