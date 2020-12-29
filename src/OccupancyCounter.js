@@ -1,14 +1,11 @@
 import React from 'react'
 import firebase from 'firebase';
-
 import "./firestore";
-import { FirebaseDatabaseProvider } from "@react-firebase/database";
 
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
-import HomeIcon from '@material-ui/icons/Home';
 
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
@@ -52,22 +49,6 @@ class OccupancyCounter extends React.Component {
         }
     }
 
-    beginInterval() {
-
-        this.interval = setInterval(() => 
-        
-        firebase.firestore().collection("StoreCounts").doc(this.state.connectedTo).get().then((query) => { 
-
-            this.setState({
-                count: query.data().count
-            })
-
-        })
-
-        , 1);
-
-    }
-
     storeCodeChanged = (e) => {
         this.setState({ 
             storeCode:  e.target.value.toUpperCase(),
@@ -82,30 +63,25 @@ class OccupancyCounter extends React.Component {
             return;
         }
 
-        listener = firebase.firestore().collection("StoreCounts").doc("AAA001").onSnapshot({
+        listener = firebase.firestore().collection("StoreCounts").doc(this.state.storeCode).onSnapshot({
             // Listen for document metadata changes
                 includeMetadataChanges: false
             }, 
         (doc) => {
-            // console.log(doc.data().count);
             this.setState({ count: doc.data().count })
         });
             
         firebase.firestore().collection("StoreCounts").doc(this.state.storeCode).get().then((query) => {
 
             if (query.data() !== undefined) {
-                // console.log(query.data())
                 this.setState({ 
                     connectedTo: this.state.storeCode,
                     count: query.data().count
                 })
-                // this.beginInterval();
             }
             else {
                 this.setState({ isValid: false })
-            }
-
-            
+            } 
         });
     
     }
@@ -113,7 +89,6 @@ class OccupancyCounter extends React.Component {
     disconnectButtonClicked() {
 
         listener();
-        clearInterval(this.interval)
         this.setState({connectedTo: ""})
 
     }
@@ -123,7 +98,6 @@ class OccupancyCounter extends React.Component {
         var connectedStore = firebase.firestore().collection("StoreCounts").doc(this.state.connectedTo);
 
         return connectedStore.update({
-            // count: this.state.count + 1
             count: firebase.firestore.FieldValue.increment(1)
         })
 
@@ -134,7 +108,6 @@ class OccupancyCounter extends React.Component {
         var connectedStore = firebase.firestore().collection("StoreCounts").doc(this.state.connectedTo);
 
         return connectedStore.update({
-            // count: this.state.count - 1
             count: firebase.firestore.FieldValue.increment(-1)
         })
 
@@ -144,7 +117,6 @@ class OccupancyCounter extends React.Component {
 
 
     }
-
     
     render() {
 
@@ -156,78 +128,76 @@ class OccupancyCounter extends React.Component {
 
             <div>
                     
-                    {/* // position: 'absolute', 
-                    // left: '50%', 
-                    // top: '50%', 
-                    // transform: 'translate(-50%, -50%)',
-                    // display: 'flex',
-                    // height: "100vh", 
-                    // width: "100%" */}
+                {/* // position: 'absolute', 
+                // left: '50%', 
+                // top: '50%', 
+                // transform: 'translate(-50%, -50%)',
+                // display: 'flex',
+                // height: "100vh", 
+                // width: "100%" */}
 
-                    <Grid container spacing={3}>
+                <Grid container spacing={3}>
 
-                        <Grid item xs={12}>
-                            <h2 style={{textAlign: "center"}}>Occupancy Counter</h2>
-                        </Grid>
-                        <Grid item xs={12}></Grid>
-                        <Grid item xs={12}></Grid>
-                        <Grid item xs={12} style={{textAlign: "center"}}>
-                            <TextField
-                                style={styles.componentDimensions}
-                                error={!this.state.isValid}
-                                id="outlined-error"
-                                label="Enter Store Code"
-                                helperText={this.state.isValid ? "" : "Invalid Store Code"}
-                                variant="outlined"
-                                value={this.state.storeCode}
-                                onChange={this.storeCodeChanged} 
-                            /> 
-                        </Grid>
-                        <Grid item xs={12} style={{textAlign: "center"}}>
-                            <Button   
-                                color="primary"
-                                style={styles.submitButton}
-                                variant="contained"
-                                size="large"
-                                onClick={this.createButtonClicked.bind(this)}>
-                                Create
-                            </Button>
-                        </Grid>
-                        <Grid item xs={12} style={{textAlign: "center"}}>
-                            <Button   
-                                color="primary"
-                                style={styles.submitButton}
-                                variant="contained"
-                                size="large"
-                                onClick={this.connectButtonClicked.bind(this)}>
-                                Connect
-                            </Button>
-                            &nbsp;&nbsp;&nbsp;&nbsp;
-                            <Button
-                                color="secondary"
-                                style={styles.submitButton}
-                                variant="contained"
-                                size="large"
-                                onClick={this.disconnectButtonClicked.bind(this)}>
-                                Disconnect
-                            </Button>
-                        </Grid>
-
-                        <Grid item xs={12} style={{textAlign: "center"}}>
-
-                            <IconButton onClick={this.upArrowClicked.bind(this)}>
-                                <KeyboardArrowUpIcon style={styles.arrowSize}/>
-                            </IconButton>
-                            <h1>
-                                {this.state.count}
-                            </h1>
-                            <IconButton onClick={this.downArrowClicked.bind(this)}>
-                                <KeyboardArrowDownIcon style={styles.arrowSize} />
-                            </IconButton>
-
-                        </Grid>
+                    <Grid item xs={12}>
+                        <h2 style={{textAlign: "center"}}>Occupancy Counter</h2>
                     </Grid>
-                {/* </FirebaseDatabaseNode> */}
+                    <Grid item xs={12}></Grid>
+                    <Grid item xs={12}></Grid>
+                    <Grid item xs={12} style={{textAlign: "center"}}>
+                        <TextField
+                            style={styles.componentDimensions}
+                            error={!this.state.isValid}
+                            id="outlined-error"
+                            label="Enter Store Code"
+                            helperText={this.state.isValid ? "" : "Invalid Store Code"}
+                            variant="outlined"
+                            value={this.state.storeCode}
+                            onChange={this.storeCodeChanged} 
+                        /> 
+                    </Grid>
+                    <Grid item xs={12} style={{textAlign: "center"}}>
+                        <Button   
+                            color="primary"
+                            style={styles.submitButton}
+                            variant="contained"
+                            size="large"
+                            onClick={this.createButtonClicked.bind(this)}>
+                            Create
+                        </Button>
+                    </Grid>
+                    <Grid item xs={12} style={{textAlign: "center"}}>
+                        <Button   
+                            color="primary"
+                            style={styles.submitButton}
+                            variant="contained"
+                            size="large"
+                            onClick={this.connectButtonClicked.bind(this)}>
+                            Connect
+                        </Button>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <Button
+                            color="secondary"
+                            style={styles.submitButton}
+                            variant="contained"
+                            size="large"
+                            onClick={this.disconnectButtonClicked.bind(this)}>
+                            Disconnect
+                        </Button>
+                    </Grid>
+
+                    <Grid item xs={12} style={{textAlign: "center"}}>
+
+                        <IconButton onClick={this.upArrowClicked.bind(this)}>
+                            <KeyboardArrowUpIcon style={styles.arrowSize}/>
+                        </IconButton>
+                        <h1>
+                            {this.state.count}
+                        </h1>
+                        <IconButton onClick={this.downArrowClicked.bind(this)}>
+                            <KeyboardArrowDownIcon style={styles.arrowSize} />
+                        </IconButton>
+                    </Grid>
+                </Grid>
             </div>
         )
     }
