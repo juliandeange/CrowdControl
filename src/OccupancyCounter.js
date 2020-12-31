@@ -6,9 +6,16 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
+import { makeStyles } from '@material-ui/core/styles';
 
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
+
+function Alert(props) {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
+  }
 
 var listener = {};
 
@@ -44,10 +51,25 @@ class OccupancyCounter extends React.Component {
             storeCode: "",
             isValid: true,
             count: 0,
-            connectedTo: ""
+            connectedTo: "",
+
+            shownotif: false
 
         }
     }
+
+    handleOpen() {
+
+        this.setState({ shownotif: true })
+    
+    }
+    
+    
+    handleClose() {
+        
+        this.setState({ shownotif: false })
+        
+      };
 
     storeCodeChanged = (e) => {
         this.setState({ 
@@ -83,6 +105,8 @@ class OccupancyCounter extends React.Component {
                 this.setState({ isValid: false })
             } 
         });
+
+        this.handleOpen()
     
     }
 
@@ -198,6 +222,11 @@ class OccupancyCounter extends React.Component {
                         </IconButton>
                     </Grid>
                 </Grid>
+                <Snackbar open={this.state.shownotif} autoHideDuration={6000} onClose={this.handleClose.bind(this)}>
+                    <Alert onClose={this.handleClose.bind(this)} severity="success">
+                        This is a success message!
+                    </Alert>
+                </Snackbar>
             </div>
         )
     }
