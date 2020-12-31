@@ -53,19 +53,22 @@ class OccupancyCounter extends React.Component {
             count: 0,
             connectedTo: "",
 
-            shownotif: false
+            // Snackbar Properties
+            shownotif: false,
+            severity: "",
+            message: ""
 
         }
     }
 
-    handleOpen() {
+    snackbarOpen(message, severity) {
 
-        this.setState({ shownotif: true })
+        this.setState({ shownotif: true, severity: severity, message: message })
     
     }
     
     
-    handleClose() {
+    snackbarClose() {
         
         this.setState({ shownotif: false })
         
@@ -106,7 +109,7 @@ class OccupancyCounter extends React.Component {
             } 
         });
 
-        this.handleOpen()
+        this.snackbarOpen("Connected to Store!", "success")
     
     }
 
@@ -222,9 +225,9 @@ class OccupancyCounter extends React.Component {
                         </IconButton>
                     </Grid>
                 </Grid>
-                <Snackbar open={this.state.shownotif} autoHideDuration={6000} onClose={this.handleClose.bind(this)}>
-                    <Alert onClose={this.handleClose.bind(this)} severity="success">
-                        This is a success message!
+                <Snackbar open={this.state.shownotif} autoHideDuration={6000} onClose={this.snackbarClose.bind(this)}>
+                    <Alert onClose={this.snackbarClose} severity={this.state.severity}>
+                        {this.state.message}
                     </Alert>
                 </Snackbar>
             </div>
