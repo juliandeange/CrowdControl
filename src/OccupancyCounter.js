@@ -7,15 +7,11 @@ import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
 import Snackbar from '@material-ui/core/Snackbar';
-import MuiAlert from '@material-ui/lab/Alert';
 import { makeStyles } from '@material-ui/core/styles';
 
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
-
-function Alert(props) {
-    return <MuiAlert elevation={6} variant="filled" {...props} />;
-  }
+import CustomSnackbar from './Components/CustomSnackbar';
 
 var listener = {};
 
@@ -53,26 +49,10 @@ class OccupancyCounter extends React.Component {
             count: 0,
             connectedTo: "",
 
-            // Snackbar Properties
-            shownotif: false,
-            severity: "",
-            message: ""
+            openSnack: false
 
         }
     }
-
-    snackbarOpen(message, severity) {
-
-        this.setState({ shownotif: true, severity: severity, message: message })
-    
-    }
-    
-    
-    snackbarClose() {
-        
-        this.setState({ shownotif: false })
-        
-      };
 
     storeCodeChanged = (e) => {
         this.setState({ 
@@ -107,10 +87,7 @@ class OccupancyCounter extends React.Component {
             else {
                 this.setState({ isValid: false })
             } 
-        });
-
-        this.snackbarOpen("Connected to Store!", "success")
-    
+        });    
     }
 
     disconnectButtonClicked() {
@@ -225,11 +202,7 @@ class OccupancyCounter extends React.Component {
                         </IconButton>
                     </Grid>
                 </Grid>
-                <Snackbar open={this.state.shownotif} autoHideDuration={6000} onClose={this.snackbarClose.bind(this)}>
-                    <Alert onClose={this.snackbarClose} severity={this.state.severity}>
-                        {this.state.message}
-                    </Alert>
-                </Snackbar>
+                <CustomSnackbar open={this.state.snack} message="Test Message" severity="success" />
             </div>
         )
     }
