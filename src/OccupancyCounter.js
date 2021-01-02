@@ -8,11 +8,9 @@ import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
-import { makeStyles } from '@material-ui/core/styles';
 
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
-import CustomSnackbar from './Components/CustomSnackbar';
 
 function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -75,17 +73,20 @@ class OccupancyCounter extends React.Component {
             return;
         }
 
-        listener = firebase.firestore().collection("StoreCounts").doc(this.state.storeCode).onSnapshot({
-            // Listen for document metadata changes
-                includeMetadataChanges: false
-            }, 
-        (doc) => {
-            this.setState({ count: doc.data().count })
-        });
+
             
         firebase.firestore().collection("StoreCounts").doc(this.state.storeCode).get().then((query) => {
 
+            // If connected successfully
             if (query.data() !== undefined) {
+
+                listener = firebase.firestore().collection("StoreCounts").doc(this.state.storeCode).onSnapshot({
+                    includeMetadataChanges: false
+                }, 
+                (doc) => {
+                    this.setState({ count: doc.data().count })
+                });
+
                 this.setState({ 
                     connectedTo: this.state.storeCode,
                     count: query.data().count
@@ -96,7 +97,7 @@ class OccupancyCounter extends React.Component {
             } 
         });   
         
-        this.snackbarOpen("A Message", "error")
+        // this.snackbarOpen("A Message", "error")
 
     }
 
@@ -184,7 +185,7 @@ class OccupancyCounter extends React.Component {
                             error={!this.state.isValid}
                             id="outlined-error"
                             label="Enter Store Code"
-                            helperText={this.state.isValid ? "" : "Invalid Store Code"}
+                            // helperText={this.state.isValid ? "" : "Invalid Store Code"}
                             variant="outlined"
                             value={this.state.storeCode}
                             onChange={this.storeCodeChanged} 
