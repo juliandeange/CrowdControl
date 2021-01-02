@@ -91,14 +91,18 @@ class OccupancyCounter extends React.Component {
                     connectedTo: this.state.storeCode,
                     count: query.data().count
                 })
+
+                this.snackbarOpen("Successfully Connected!", "success")
+
             }
+
             else {
+
+                this.snackbarOpen("Unable to connect to: " + this.state.storeCode, "error")
+
                 this.setState({ isValid: false })
             } 
         });   
-        
-        // this.snackbarOpen("A Message", "error")
-
     }
 
     disconnectButtonClicked() {
@@ -148,8 +152,6 @@ class OccupancyCounter extends React.Component {
         
         this.setState({ 
             snackOpen: false , 
-            snackMessage: " ", 
-            snackSeverity: " "
         })
         
     }
@@ -235,7 +237,7 @@ class OccupancyCounter extends React.Component {
                     </Grid>
                 </Grid>
                 <Snackbar open={this.state.snackOpen} autoHideDuration={6000} onClose={this.snackbarClose.bind(this)}>
-                    <Alert onClose={this.snackbarClose} severity={this.state.snackSeverity}>
+                    <Alert onClose={this.snackbarClose.bind(this)} severity={this.state.snackSeverity}>
                         {this.state.snackMessage}
                     </Alert>
                 </Snackbar>
