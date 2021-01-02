@@ -7,11 +7,16 @@ import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
 import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
 import { makeStyles } from '@material-ui/core/styles';
 
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import CustomSnackbar from './Components/CustomSnackbar';
+
+function Alert(props) {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 var listener = {};
 
@@ -49,7 +54,9 @@ class OccupancyCounter extends React.Component {
             count: 0,
             connectedTo: "",
 
-            openSnack: false
+            snackOpen: false,
+            snackSeverity: "",
+            snackMessage: ""
 
         }
     }
@@ -87,7 +94,10 @@ class OccupancyCounter extends React.Component {
             else {
                 this.setState({ isValid: false })
             } 
-        });    
+        });   
+        
+        this.snackbarOpen("A Message", "error")
+
     }
 
     disconnectButtonClicked() {
@@ -120,6 +130,27 @@ class OccupancyCounter extends React.Component {
     createButtonClicked() {
 
 
+    }
+
+    snackbarOpen(message, severity) {
+
+        this.setState({ 
+            snackOpen: true, 
+            snackMessage: message, 
+            snackSeverity: severity 
+        })
+        
+    }
+    
+    
+    snackbarClose() {
+        
+        this.setState({ 
+            snackOpen: false , 
+            snackMessage: " ", 
+            snackSeverity: " "
+        })
+        
     }
     
     render() {
@@ -202,7 +233,11 @@ class OccupancyCounter extends React.Component {
                         </IconButton>
                     </Grid>
                 </Grid>
-                <CustomSnackbar open={this.state.snack} message="Test Message" severity="success" />
+                <Snackbar open={this.state.snackOpen} autoHideDuration={6000} onClose={this.snackbarClose.bind(this)}>
+                    <Alert onClose={this.snackbarClose} severity={this.state.snackSeverity}>
+                        {this.state.snackMessage}
+                    </Alert>
+                </Snackbar>
             </div>
         )
     }

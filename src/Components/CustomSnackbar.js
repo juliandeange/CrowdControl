@@ -4,7 +4,7 @@ import MuiAlert from '@material-ui/lab/Alert';
 
 function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
-  }
+}
 
 class CustomSnackbar extends React.Component { 
 
@@ -22,7 +22,7 @@ class CustomSnackbar extends React.Component {
     snackbarOpen(message, severity) {
 
         this.setState({ shownotif: true })
-    
+        
     }
     
     
@@ -30,7 +30,7 @@ class CustomSnackbar extends React.Component {
         
         this.setState({ shownotif: false })
         
-      };
+    }
 
     render() {
 
