@@ -1,16 +1,19 @@
 import React from 'react'
-import firebase from 'firebase';
-import "./firestore";
+import firebase from 'firebase'
+import "./firestore"
 
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
-import Grid from '@material-ui/core/Grid';
-import IconButton from '@material-ui/core/IconButton';
-import Snackbar from '@material-ui/core/Snackbar';
-import MuiAlert from '@material-ui/lab/Alert';
+import TextField from '@material-ui/core/TextField'
+import Button from '@material-ui/core/Button'
+import Grid from '@material-ui/core/Grid'
+import IconButton from '@material-ui/core/IconButton'
+import Snackbar from '@material-ui/core/Snackbar'
+import MuiAlert from '@material-ui/lab/Alert'
+import BottomNavigation from '@material-ui/core/BottomNavigation'
+import BottomNavigationAction from '@material-ui/core/BottomNavigationAction'
+import ImportContacts from '@material-ui/icons/ImportContacts'
 
-import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
-import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
+import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown'
+import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp'
 
 function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -54,7 +57,9 @@ class OccupancyCounter extends React.Component {
 
             snackOpen: false,
             snackSeverity: "",
-            snackMessage: ""
+            snackMessage: "",
+
+            navValue: ""
 
         }
     }
@@ -155,6 +160,12 @@ class OccupancyCounter extends React.Component {
         })
         
     }
+
+    NavChange = (e) => {
+
+        console.log(e)
+
+    }
     
     render() {
 
@@ -241,6 +252,21 @@ class OccupancyCounter extends React.Component {
                         {this.state.snackMessage}
                     </Alert>
                 </Snackbar>
+
+                {/* <BottomNavigation 
+                style={{    width: '100%',
+                position: 'fixed',
+                bottom: 0,}}
+                    value={this.state.navValue} 
+                    // onChange={(event, newValue) => {setValue(newValue); }}
+                    onChange={this.NavChange}
+                    showLabels
+                    // className={classes.root}
+                    >
+                    <BottomNavigationAction label="ImportContacts" icon={<ImportContacts />} />
+                    <BottomNavigationAction label="ImportContacts" icon={<ImportContacts />} />
+                </BottomNavigation> */}
+
             </div>
         )
     }
