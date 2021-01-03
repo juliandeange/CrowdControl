@@ -8,12 +8,13 @@ import Grid from '@material-ui/core/Grid'
 import IconButton from '@material-ui/core/IconButton'
 import Snackbar from '@material-ui/core/Snackbar'
 import MuiAlert from '@material-ui/lab/Alert'
-import BottomNavigation from '@material-ui/core/BottomNavigation'
-import BottomNavigationAction from '@material-ui/core/BottomNavigationAction'
-import ImportContacts from '@material-ui/icons/ImportContacts'
+// import BottomNavigation from '@material-ui/core/BottomNavigation'
+// import BottomNavigationAction from '@material-ui/core/BottomNavigationAction'
+// import ImportContacts from '@material-ui/icons/ImportContacts'
 
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown'
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp'
+import ForwardOutlinedIcon from '@material-ui/icons/ForwardOutlined'
 
 function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -32,7 +33,7 @@ const styles = {
     },
 
     componentDimensions: {
-        width: 194,
+        width: 300,
         height: 55
     },
 
@@ -59,7 +60,7 @@ class OccupancyCounter extends React.Component {
             snackSeverity: "",
             snackMessage: "",
 
-            navValue: ""
+            // navValue: ""
 
         }
     }
@@ -161,11 +162,11 @@ class OccupancyCounter extends React.Component {
         
     }
 
-    NavChange = (e) => {
+    // NavChange = (e) => {
 
-        console.log(e)
+    //     console.log(e)
 
-    }
+    // }
     
     render() {
 
@@ -202,7 +203,10 @@ class OccupancyCounter extends React.Component {
                             variant="outlined"
                             value={this.state.storeCode}
                             onChange={this.storeCodeChanged} 
-                        /> 
+                        />
+                        <IconButton onClick={this.connectButtonClicked.bind(this)}>
+                            <ForwardOutlinedIcon style={{height: 40, width: 40, marginTop: "-4px"}}/>
+                        </IconButton> 
                     </Grid>
                     <Grid item xs={12} style={{textAlign: "center"}}>
                         <Button   
