@@ -34,3 +34,25 @@
         // });
 
         //
+
+
+
+
+        // <Grid item xs={1}>
+        //                 <IconButton style={{color: "black"}}>
+        //                     <AddCircleOutlineOutlinedIcon />
+        //                 </IconButton>
+        //             </Grid>
+
+        //             <Grid item xs={10} >
+        //                 <h3 style={{paddingLeft: "12px", textAlign: "center"}} /*style={{textAlign: "center"}}*/>Occupancy Counter</h3>
+        //             </Grid>                    
+
+        //             <Grid item xs={1}>
+        //                 <IconButton style={{color: "black"}}>
+        //                     <HomeRoundedIcon />
+        //                 </IconButton>
+        //                 {/* <h2>
+        //                 <Button color="primary" variant="contained" style={{textAlign: "center"}}>Create New</Button>
+        //                 </h2> */}
+        //             </Grid>
