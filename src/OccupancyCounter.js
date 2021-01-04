@@ -15,6 +15,8 @@ import MuiAlert from '@material-ui/lab/Alert'
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown'
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp'
 import ForwardOutlinedIcon from '@material-ui/icons/ForwardOutlined'
+import AddCircleOutlineOutlinedIcon from '@material-ui/icons/AddCircleOutlineOutlined'
+import HomeRoundedIcon from '@material-ui/icons/HomeRounded'
 
 function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -33,7 +35,7 @@ const styles = {
     },
 
     componentDimensions: {
-        width: 300,
+        width: 194,
         height: 55
     },
 
@@ -186,13 +188,29 @@ class OccupancyCounter extends React.Component {
                 // height: "100vh", 
                 // width: "100%" */}
 
-                <Grid container spacing={3}>
+                <Grid container spacing={0}>
 
-                    <Grid item xs={12}>
-                        <h2 style={{textAlign: "center"}}>Occupancy Counter</h2>
+                    <Grid item xs={2}>
+                        <IconButton style={{color: "black"}}>
+                            <AddCircleOutlineOutlinedIcon />
+                        </IconButton>
                     </Grid>
-                    <Grid item xs={12}></Grid>
-                    <Grid item xs={12}></Grid>
+
+                    <Grid item xs={8} >
+                        <h3 style={{textAlign: "center"}} /*style={{textAlign: "center"}}*/>Occupancy Counter</h3>
+                    </Grid>                    
+
+                    <Grid item xs={2}>
+                        <IconButton style={{color: "black", textAlign: "right"}}>
+                            <HomeRoundedIcon />
+                        </IconButton>
+                        {/* <h2>
+                        <Button color="primary" variant="contained" style={{textAlign: "center"}}>Create New</Button>
+                        </h2> */}
+                    </Grid>
+
+                    <Grid item xs={12} />
+                    <Grid item xs={12} />
                     <Grid item xs={12} style={{textAlign: "center"}}>
                         <TextField
                             style={styles.componentDimensions}
@@ -208,7 +226,7 @@ class OccupancyCounter extends React.Component {
                             <ForwardOutlinedIcon style={{height: 40, width: 40, marginTop: "-4px"}}/>
                         </IconButton> 
                     </Grid>
-                    <Grid item xs={12} style={{textAlign: "center"}}>
+                    {/* <Grid item xs={12} style={{textAlign: "center"}}>
                         <Button   
                             color="primary"
                             style={styles.submitButton}
@@ -217,7 +235,7 @@ class OccupancyCounter extends React.Component {
                             onClick={this.createButtonClicked.bind(this)}>
                             Create
                         </Button>
-                    </Grid>
+                    </Grid> */}
                     <Grid item xs={12} style={{textAlign: "center"}}>
                         <Button   
                             color="primary"
@@ -227,7 +245,9 @@ class OccupancyCounter extends React.Component {
                             onClick={this.connectButtonClicked.bind(this)}>
                             Connect
                         </Button>
-                        &nbsp;&nbsp;&nbsp;&nbsp;
+                    </Grid>
+                    <Grid item xs={12} style={{textAlign: "center"}}>
+                        {/* &nbsp;&nbsp;&nbsp;&nbsp; */}
                         <Button
                             color="secondary"
                             style={styles.submitButton}
