@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import OccupancyCounter from './OccupancyCounter';
+import Home from './home';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <OccupancyCounter />
+    <Home />
   </React.StrictMode>,
   document.getElementById('root')
 );
