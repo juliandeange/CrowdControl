@@ -193,9 +193,7 @@ class OccupancyCounter extends React.Component {
 
         return(
 
-
             <div>
-
 
                 <div style={styles.root}>
                     <AppBar position="static">
@@ -212,23 +210,7 @@ class OccupancyCounter extends React.Component {
                         </Toolbar>
                     </AppBar>
                 </div>
-
-
-                {/* <AppBar position="static">
-                    <Toolbar>
-                        <Typography style={styles.title} variant="h6" noWrap>
-                            Occupancy Counter
-                        </Typography>
-                        <div>
-                            <IconButton style={{ flex: 1 }}>
-                                <HomeRoundedIcon />
-                            </IconButton>
-                        </div>
-                    </Toolbar>
-                </AppBar> */}
-
-
-                    
+     
                 {/* // position: 'absolute', 
                 // left: '50%', 
                 // top: '50%', 
@@ -236,42 +218,9 @@ class OccupancyCounter extends React.Component {
                 // display: 'flex',
                 // height: "100vh", 
                 // width: "100%" */}
-
-                
-                        
-                        {/* <Button
-                            
-                            color="secondary"
-                            variant="contained">
-                            <HomeRoundedIcon />
-                            Home
-                        </Button>
-
-
-                        
-                        <Button
-                            
-                            color="primary"
-                            variant="contained">
-                            <AddCircleOutlineOutlinedIcon />
-                            Create New
-                        </Button> */}
                     
 
                     <Grid container spacing={0}>
-
-                    <Grid item xs={8} >
-                        <h3 style={{textAlign: "center"}} /*style={{textAlign: "center"}}*/>Occupancy Counter</h3>
-                    </Grid>                    
-
-                    <Grid item xs={2}>
-                        <IconButton style={{color: "black", textAlign: "right"}}>
-                            <HomeRoundedIcon />
-                        </IconButton>
-                        {/* <h2>
-                        <Button color="primary" variant="contained" style={{textAlign: "center"}}>Create New</Button>
-                        </h2> */}
-                    </Grid>
 
                     <Grid item xs={12} />
                     <Grid item xs={12} />
@@ -290,16 +239,6 @@ class OccupancyCounter extends React.Component {
                             <ForwardOutlinedIcon style={{height: 40, width: 40, marginTop: "-4px"}}/>
                         </IconButton> 
                     </Grid>
-                    {/* <Grid item xs={12} style={{textAlign: "center"}}>
-                        <Button   
-                            color="primary"
-                            style={styles.submitButton}
-                            variant="contained"
-                            size="large"
-                            onClick={this.createButtonClicked.bind(this)}>
-                            Create
-                        </Button>
-                    </Grid> */}
                     <Grid item xs={12} style={{textAlign: "center"}}>
                         <Button   
                             color="primary"
@@ -340,20 +279,6 @@ class OccupancyCounter extends React.Component {
                         {this.state.snackMessage}
                     </Alert>
                 </Snackbar>
-
-                {/* <BottomNavigation 
-                style={{    width: '100%',
-                position: 'fixed',
-                bottom: 0,}}
-                    value={this.state.navValue} 
-                    // onChange={(event, newValue) => {setValue(newValue); }}
-                    onChange={this.NavChange}
-                    showLabels
-                    // className={classes.root}
-                    >
-                    <BottomNavigationAction label="ImportContacts" icon={<ImportContacts />} />
-                    <BottomNavigationAction label="ImportContacts" icon={<ImportContacts />} />
-                </BottomNavigation> */}
 
             </div>
         )
