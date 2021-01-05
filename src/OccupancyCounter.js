@@ -8,6 +8,9 @@ import Grid from '@material-ui/core/Grid'
 import IconButton from '@material-ui/core/IconButton'
 import Snackbar from '@material-ui/core/Snackbar'
 import MuiAlert from '@material-ui/lab/Alert'
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography'
 // import BottomNavigation from '@material-ui/core/BottomNavigation'
 // import BottomNavigationAction from '@material-ui/core/BottomNavigationAction'
 // import ImportContacts from '@material-ui/icons/ImportContacts'
@@ -42,7 +45,13 @@ const styles = {
     arrowSize: {
         height: 50,
         width: 50
-    }
+    },
+    title: {
+        display: 'none',
+        [theme.breakpoints.up('sm')]: {
+          display: 'block',
+        }
+      }
 
 }
 
@@ -179,6 +188,17 @@ class OccupancyCounter extends React.Component {
 
 
             <div>
+
+
+                <AppBar position="static">
+                    <Toolbar>
+                        <Typography style={styles.title} variant="h6" noWrap>
+                            Occupancy Counter
+                        </Typography>
+                    </Toolbar>
+                </AppBar>
+
+
                     
                 {/* // position: 'absolute', 
                 // left: '50%', 
@@ -188,13 +208,28 @@ class OccupancyCounter extends React.Component {
                 // height: "100vh", 
                 // width: "100%" */}
 
-                <Grid container spacing={0}>
+                
+                        
+                        {/* <Button
+                            
+                            color="secondary"
+                            variant="contained">
+                            <HomeRoundedIcon />
+                            Home
+                        </Button>
 
-                    <Grid item xs={2}>
-                        <IconButton style={{color: "black"}}>
+
+                        
+                        <Button
+                            
+                            color="primary"
+                            variant="contained">
                             <AddCircleOutlineOutlinedIcon />
-                        </IconButton>
-                    </Grid>
+                            Create New
+                        </Button> */}
+                    
+
+                    <Grid container spacing={0}>
 
                     <Grid item xs={8} >
                         <h3 style={{textAlign: "center"}} /*style={{textAlign: "center"}}*/>Occupancy Counter</h3>
