@@ -47,11 +47,20 @@ const styles = {
         width: 50
     },
     title: {
-        display: 'none',
-        [theme.breakpoints.up('sm')]: {
-          display: 'block',
-        }
-      }
+        display: 'block',
+        // [theme.breakpoints.up('sm')]: {
+        //   display: 'block',
+        // }
+      },
+      root: {
+        flexGrow: 1,
+      },
+      menuButton: {
+        marginRight: 2,
+      },
+      title: {
+        flexGrow: 1,
+      },
 
 }
 
@@ -89,8 +98,6 @@ class OccupancyCounter extends React.Component {
             this.setState({ isValid: false })
             return;
         }
-
-
             
         firebase.firestore().collection("StoreCounts").doc(this.state.storeCode).get().then((query) => {
 
@@ -190,13 +197,35 @@ class OccupancyCounter extends React.Component {
             <div>
 
 
-                <AppBar position="static">
+                <div style={styles.root}>
+                    <AppBar position="static">
+                        <Toolbar>
+                            <Typography variant="h6" style={styles.title}>
+                                Occupancy Counter
+                            </Typography>
+                            <IconButton edge="end" style={styles.menuButton} color="inherit" aria-label="menu">
+                                <HomeRoundedIcon />
+                            </IconButton>
+                            <IconButton edge="end" style={styles.menuButton} color="inherit" aria-label="menu">
+                                <AddCircleOutlineOutlinedIcon />
+                            </IconButton>
+                        </Toolbar>
+                    </AppBar>
+                </div>
+
+
+                {/* <AppBar position="static">
                     <Toolbar>
                         <Typography style={styles.title} variant="h6" noWrap>
                             Occupancy Counter
                         </Typography>
+                        <div>
+                            <IconButton style={{ flex: 1 }}>
+                                <HomeRoundedIcon />
+                            </IconButton>
+                        </div>
                     </Toolbar>
-                </AppBar>
+                </AppBar> */}
 
 
                     
