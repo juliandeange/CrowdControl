@@ -80,8 +80,6 @@ class OccupancyCounter extends React.Component {
             snackSeverity: "",
             snackMessage: "",
 
-            // navValue: ""
-
         }
     }
 
@@ -179,12 +177,6 @@ class OccupancyCounter extends React.Component {
         })
         
     }
-
-    // NavChange = (e) => {
-
-    //     console.log(e)
-
-    // }
     
     render() {
 
