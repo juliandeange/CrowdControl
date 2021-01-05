@@ -64,7 +64,7 @@ const styles = {
 
 }
 
-class OccupancyCounter extends React.Component {
+class Home extends React.Component {
 
     constructor(props) {
 
@@ -212,8 +212,12 @@ class OccupancyCounter extends React.Component {
                 // width: "100%" */}
                     
 
-                    <Grid container spacing={0}>
+                    <Grid container spacing={3}>
 
+                    <Grid item xs={12} />
+                    <Grid item xs={12} />
+                    <Grid item xs={12} />
+                    <Grid item xs={12} />
                     <Grid item xs={12} />
                     <Grid item xs={12} />
                     <Grid item xs={12} style={{textAlign: "center"}}>
@@ -277,4 +281,4 @@ class OccupancyCounter extends React.Component {
     }
 }
 
-export default OccupancyCounter;
+export default Home;
