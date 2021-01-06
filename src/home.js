@@ -12,8 +12,6 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography'
 
-import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown'
-import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp'
 import ForwardOutlinedIcon from '@material-ui/icons/ForwardOutlined'
 import AddCircleOutlineOutlinedIcon from '@material-ui/icons/AddCircleOutlineOutlined'
 import HomeRoundedIcon from '@material-ui/icons/HomeRounded'
@@ -43,12 +41,6 @@ const styles = {
         height: 50,
         width: 50
     },
-    title: {
-        display: 'block',
-        // [theme.breakpoints.up('sm')]: {
-        //   display: 'block',
-        // }
-      },
       root: {
         flexGrow: 1,
       },
@@ -128,26 +120,6 @@ class Home extends React.Component {
 
         listener();
         this.setState({connectedTo: ""})
-
-    }
-
-    upArrowClicked() {
-
-        var connectedStore = firebase.firestore().collection("StoreCounts").doc(this.state.connectedTo);
-
-        return connectedStore.update({
-            count: firebase.firestore.FieldValue.increment(1)
-        })
-
-    }
-
-    downArrowClicked() {
-
-        var connectedStore = firebase.firestore().collection("StoreCounts").doc(this.state.connectedTo);
-
-        return connectedStore.update({
-            count: firebase.firestore.FieldValue.increment(-1)
-        })
 
     }
 
@@ -252,19 +224,6 @@ class Home extends React.Component {
                             onClick={this.disconnectButtonClicked.bind(this)}>
                             Disconnect
                         </Button>
-                    </Grid>
-
-                    <Grid item xs={12} style={{textAlign: "center"}}>
-
-                        <IconButton onClick={this.upArrowClicked.bind(this)}>
-                            <KeyboardArrowUpIcon style={styles.arrowSize}/>
-                        </IconButton>
-                        <h1>
-                            {this.state.count}
-                        </h1>
-                        <IconButton onClick={this.downArrowClicked.bind(this)}>
-                            <KeyboardArrowDownIcon style={styles.arrowSize} />
-                        </IconButton>
                     </Grid>
                 </Grid>
                 <Snackbar open={this.state.snackOpen} autoHideDuration={6000} onClose={this.snackbarClose.bind(this)}>
