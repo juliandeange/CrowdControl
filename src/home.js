@@ -139,7 +139,6 @@ class Home extends React.Component {
         
     }
     
-    
     snackbarClose() {
         
         this.setState({ 
@@ -163,69 +162,52 @@ class Home extends React.Component {
                             <Typography variant="h6" style={styles.title}>
                                 Occupancy Counter
                             </Typography>
-                            <IconButton edge="end" style={styles.menuButton} color="inherit" aria-label="menu">
-                                <HomeRoundedIcon />
-                            </IconButton>
-                            <IconButton edge="end" style={styles.menuButton} color="inherit" aria-label="menu">
-                                <AddCircleOutlineOutlinedIcon />
-                            </IconButton>
+                            {this.state. connectedTo !== "" ? 
+                            <div>
+                                <Button
+                                    color="secondary"
+                                    // style={styles.submitButton}
+                                    variant="contained"
+                                    size="small"
+                                    onClick={this.disconnectButtonClicked.bind(this)}>
+                                    Disconnect
+                                </Button>
+                            </div>
+                            :
+                            <div>
+                                <IconButton edge="end" style={styles.menuButton} color="inherit" aria-label="menu">
+                                    <HomeRoundedIcon />
+                                </IconButton>
+                                <IconButton edge="end" style={styles.menuButton} color="inherit" aria-label="menu">
+                                    <AddCircleOutlineOutlinedIcon />
+                                </IconButton>
+                            </div>
+                            }
                         </Toolbar>
                     </AppBar>
-                </div>
-     
-                {/* // position: 'absolute', 
-                // left: '50%', 
-                // top: '50%', 
-                // transform: 'translate(-50%, -50%)',
-                // display: 'flex',
-                // height: "100vh", 
-                // width: "100%" */}
-                    
+                </div>                    
 
-                    <Grid container spacing={3}>
+                <Grid container spacing={3}>
 
-                    <Grid item xs={12} />
-                    <Grid item xs={12} />
-                    <Grid item xs={12} />
-                    <Grid item xs={12} />
-                    <Grid item xs={12} />
-                    <Grid item xs={12} />
+                            <Grid item xs={12} />
+                            <Grid item xs={12} />
+                            <Grid item xs={12} />
+
                     <Grid item xs={12} style={{textAlign: "center"}}>
                         <TextField
                             style={styles.componentDimensions}
                             error={!this.state.isValid}
                             id="outlined-error"
                             label="Enter Store Code"
-                            // helperText={this.state.isValid ? "" : "Invalid Store Code"}
                             variant="outlined"
                             value={this.state.storeCode}
                             onChange={this.storeCodeChanged} 
                         />
                         <IconButton onClick={this.connectButtonClicked.bind(this)}>
-                            <ForwardOutlinedIcon style={{height: 40, width: 40, marginTop: "-4px"}}/>
+                            <ForwardOutlinedIcon style={{height: 40, width: 40, marginTop: "-4px", color: "black"}}/>
                         </IconButton> 
                     </Grid>
-                    <Grid item xs={12} style={{textAlign: "center"}}>
-                        <Button   
-                            color="primary"
-                            style={styles.submitButton}
-                            variant="contained"
-                            size="large"
-                            onClick={this.connectButtonClicked.bind(this)}>
-                            Connect
-                        </Button>
-                    </Grid>
-                    <Grid item xs={12} style={{textAlign: "center"}}>
                         {/* &nbsp;&nbsp;&nbsp;&nbsp; */}
-                        <Button
-                            color="secondary"
-                            style={styles.submitButton}
-                            variant="contained"
-                            size="large"
-                            onClick={this.disconnectButtonClicked.bind(this)}>
-                            Disconnect
-                        </Button>
-                    </Grid>
                 </Grid>
                 
                 {this.state.connectedTo !== "" ?
