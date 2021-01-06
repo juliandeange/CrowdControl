@@ -8,20 +8,6 @@ import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown'
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp'
 
 const styles = {
-
-    submitButton: {
-        
-        // backgroundColor: "rgb(177, 0, 231)",
-        width: 194, 
-        height: 55,
-        // marginTop: 8
-    },
-
-    componentDimensions: {
-        width: 194,
-        height: 55
-    },
-
     arrowSize: {
         height: 50,
         width: 50
@@ -35,7 +21,7 @@ class Counter extends React.Component {
         super(props)
         this.state = {
 
-            count: 0,
+            // count: 0,
             
         }
 
@@ -43,7 +29,7 @@ class Counter extends React.Component {
 
     upArrowClicked() {
 
-        var connectedStore = firebase.firestore().collection("StoreCounts").doc(this.state.connectedTo);
+        var connectedStore = firebase.firestore().collection("StoreCounts").doc(this.props.connectedTo);
 
         return connectedStore.update({
             count: firebase.firestore.FieldValue.increment(1)
@@ -53,7 +39,7 @@ class Counter extends React.Component {
 
     downArrowClicked() {
 
-        var connectedStore = firebase.firestore().collection("StoreCounts").doc(this.state.connectedTo);
+        var connectedStore = firebase.firestore().collection("StoreCounts").doc(this.props.connectedTo);
 
         return connectedStore.update({
             count: firebase.firestore.FieldValue.increment(-1)
@@ -62,6 +48,7 @@ class Counter extends React.Component {
     }
 
     render() {
+
         return(
 
             <div>
@@ -70,12 +57,12 @@ class Counter extends React.Component {
                         <KeyboardArrowUpIcon style={styles.arrowSize}/>
                     </IconButton>
                     <h1>
-                        {this.state.count}
+                        {this.props.count}
                     </h1>
                     <IconButton onClick={this.downArrowClicked.bind(this)}>
                         <KeyboardArrowDownIcon style={styles.arrowSize} />
                     </IconButton>
-                    </Grid> 
+                </Grid> 
             </div>
 
         )

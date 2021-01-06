@@ -228,6 +228,10 @@ class Home extends React.Component {
                     </Grid>
                 </Grid>
                 
+                {this.state.connectedTo !== "" ?
+                    <Counter count={this.state.count} connectedTo={this.state.connectedTo} />
+                : null }
+
                 <Snackbar open={this.state.snackOpen} autoHideDuration={6000} onClose={this.snackbarClose.bind(this)}>
                     <Alert onClose={this.snackbarClose.bind(this)} severity={this.state.snackSeverity}>
                         {this.state.snackMessage}
