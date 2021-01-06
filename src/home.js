@@ -11,9 +11,6 @@ import MuiAlert from '@material-ui/lab/Alert'
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography'
-// import BottomNavigation from '@material-ui/core/BottomNavigation'
-// import BottomNavigationAction from '@material-ui/core/BottomNavigationAction'
-// import ImportContacts from '@material-ui/icons/ImportContacts'
 
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown'
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp'
