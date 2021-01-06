@@ -189,13 +189,7 @@ class Home extends React.Component {
                     </AppBar>
                 </div>                    
 
-                <Grid container spacing={3}>
-
-                            <Grid item xs={12} />
-                            <Grid item xs={12} />
-                            <Grid item xs={12} />
-
-                    <Grid item xs={12} style={{textAlign: "center"}}>
+                <div style={{textAlign: "center", height: "100%"}}>
                         <TextField
                             style={styles.componentDimensions}
                             error={!this.state.isValid}
@@ -208,9 +202,8 @@ class Home extends React.Component {
                         <IconButton onClick={this.connectButtonClicked.bind(this)}>
                             <ForwardOutlinedIcon style={{height: 40, width: 40, marginTop: "-4px", color: "black"}}/>
                         </IconButton> 
-                    </Grid>
-                        {/* &nbsp;&nbsp;&nbsp;&nbsp; */}
-                </Grid>
+ 
+                </div>
                 
                 {this.state.connectedTo !== "" ?
                     <Counter count={this.state.count} connectedTo={this.state.connectedTo} />
