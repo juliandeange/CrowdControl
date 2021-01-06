@@ -1,4 +1,5 @@
 import React from 'react'
+import firebase from 'firebase'
 
 import Grid from '@material-ui/core/Grid'
 import IconButton from '@material-ui/core/IconButton'
@@ -28,6 +29,17 @@ const styles = {
 }
 
 class Counter extends React.Component {
+
+    constructor(props) {
+
+        super(props)
+        this.state = {
+
+            count: 0,
+            
+        }
+
+    }
 
     upArrowClicked() {
 
@@ -70,3 +82,5 @@ class Counter extends React.Component {
     }
 
 }
+
+export default Counter
