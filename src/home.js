@@ -122,6 +122,8 @@ class Home extends React.Component {
         listener();
         this.setState({connectedTo: ""})
 
+        this.snackbarOpen("Disconnected from store", "info")
+
     }
 
     createButtonClicked() {
