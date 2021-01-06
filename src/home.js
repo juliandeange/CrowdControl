@@ -1,6 +1,7 @@
 import React from 'react'
 import firebase from 'firebase'
 import "./firestore"
+import Counter from './Components/counter'
 
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
@@ -226,6 +227,7 @@ class Home extends React.Component {
                         </Button>
                     </Grid>
                 </Grid>
+                
                 <Snackbar open={this.state.snackOpen} autoHideDuration={6000} onClose={this.snackbarClose.bind(this)}>
                     <Alert onClose={this.snackbarClose.bind(this)} severity={this.state.snackSeverity}>
                         {this.state.snackMessage}
@@ -237,4 +239,4 @@ class Home extends React.Component {
     }
 }
 
-export default Home;
+export default Home
