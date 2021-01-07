@@ -25,22 +25,9 @@ var listener = {};
 
 const styles = {
 
-    submitButton: {
-        
-        // backgroundColor: "rgb(177, 0, 231)",
-        width: 194, 
-        height: 55,
-        // marginTop: 8
-    },
-
     componentDimensions: {
         width: 194,
         height: 55
-    },
-
-    arrowSize: {
-        height: 50,
-        width: 50
     },
       root: {
         flexGrow: 1,
@@ -169,7 +156,6 @@ class Home extends React.Component {
                             <div>
                                 <Button
                                     color="secondary"
-                                    // style={styles.submitButton}
                                     variant="contained"
                                     size="small"
                                     onClick={this.disconnectButtonClicked.bind(this)}>
