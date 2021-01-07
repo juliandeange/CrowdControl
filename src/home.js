@@ -136,7 +136,7 @@ class Home extends React.Component {
     snackbarClose() {
         
         this.setState({ 
-            snackOpen: false , 
+            snackOpen: false, 
         })
         
     }
