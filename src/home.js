@@ -12,7 +12,6 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography'
 
-import ForwardOutlinedIcon from '@material-ui/icons/ForwardOutlined'
 import AddCircleOutlineOutlinedIcon from '@material-ui/icons/AddCircleOutlineOutlined'
 import HomeRoundedIcon from '@material-ui/icons/HomeRounded'
 
