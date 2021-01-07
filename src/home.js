@@ -84,6 +84,7 @@ class Home extends React.Component {
 
         if (this.state.storeCode === "") {
             this.setState({ isValid: false })
+            this.snackbarOpen("Enter a store code to connect to" + this.state.storeCode, "error")
             return;
         }
             
@@ -189,7 +190,8 @@ class Home extends React.Component {
                     </AppBar>
                 </div>                    
 
-                <div style={{textAlign: "center", height: "100%"}}>
+                <div style={{  position: "fixed", top: "50%", left: "50%",transform: "translate(-50%, -50%)"}}>
+                    <div style={{marginBottom: "10px"}} >
                         <TextField
                             style={styles.componentDimensions}
                             error={!this.state.isValid}
@@ -199,10 +201,20 @@ class Home extends React.Component {
                             value={this.state.storeCode}
                             onChange={this.storeCodeChanged} 
                         />
-                        <IconButton onClick={this.connectButtonClicked.bind(this)}>
-                            <ForwardOutlinedIcon style={{height: 40, width: 40, marginTop: "-4px", color: "black"}}/>
-                        </IconButton> 
- 
+                    </div>
+                    <div style={{marginTop: "10px"}}>       
+                            <Button 
+                                variant="contained" 
+                                color="primary" 
+                                style={styles.componentDimensions} 
+                                onClick={this.connectButtonClicked.bind(this)}>
+                                Connect
+                            </Button>
+                            {/* <IconButton onClick={this.connectButtonClicked.bind(this)}>
+                                <ForwardOutlinedIcon style={{height: 40, width: 40, marginTop: "-4px", color: "black"}}/>
+                            </IconButton>  */}
+    
+                    </div>
                 </div>
                 
                 {this.state.connectedTo !== "" ?
