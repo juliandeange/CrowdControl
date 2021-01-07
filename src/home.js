@@ -25,6 +25,12 @@ var listener = {};
 
 const styles = {
 
+    centerPage: {
+        position: "fixed", 
+        top: "50%", 
+        left: "50%",
+        transform: "translate(-50%, -50%)"
+    },
     componentDimensions: {
         width: 194,
         height: 55
@@ -37,7 +43,7 @@ const styles = {
       },
       title: {
         flexGrow: 1,
-      },
+      }
 
 }
 
@@ -174,39 +180,37 @@ class Home extends React.Component {
                             }
                         </Toolbar>
                     </AppBar>
-                </div>                    
+                </div>      
 
-                <div style={{  position: "fixed", top: "50%", left: "50%",transform: "translate(-50%, -50%)"}}>
-                    <div style={{marginBottom: "10px"}} >
-                        <TextField
-                            style={styles.componentDimensions}
-                            error={!this.state.isValid}
-                            id="outlined-error"
-                            label="Enter Store Code"
-                            variant="outlined"
-                            value={this.state.storeCode}
-                            onChange={this.storeCodeChanged} 
-                        />
-                    </div>
-                    <div style={{marginTop: "10px"}}>       
+                {this.state.connectedTo === "" ?              
+
+                    <div style={styles.centerPage}>
+                        <div style={{marginBottom: "10px"}} >
+                            <TextField
+                                style={styles.componentDimensions}
+                                error={!this.state.isValid}
+                                id="outlined-error"
+                                label="Enter Store Code"
+                                variant="outlined"
+                                value={this.state.storeCode}
+                                onChange={this.storeCodeChanged} 
+                            />
+                        </div>
+                        <div style={{marginTop: "10px"}}>       
                             <Button 
                                 variant="contained" 
                                 color="primary" 
                                 style={styles.componentDimensions} 
                                 onClick={this.connectButtonClicked.bind(this)}>
                                 Connect
-                            </Button>
-                            {/* <IconButton onClick={this.connectButtonClicked.bind(this)}>
-                                <ForwardOutlinedIcon style={{height: 40, width: 40, marginTop: "-4px", color: "black"}}/>
-                            </IconButton>  */}
-    
+                            </Button>    
+                        </div>
                     </div>
-                </div>
-                
-                {this.state.connectedTo !== "" ?
-                    <Counter count={this.state.count} connectedTo={this.state.connectedTo} />
-                : null }
-
+                    :
+                    <div style={styles.centerPage}>
+                        <Counter count={this.state.count} connectedTo={this.state.connectedTo} />
+                    </div>
+                }
                 <Snackbar open={this.state.snackOpen} autoHideDuration={6000} onClose={this.snackbarClose.bind(this)}>
                     <Alert onClose={this.snackbarClose.bind(this)} severity={this.state.snackSeverity}>
                         {this.state.snackMessage}
