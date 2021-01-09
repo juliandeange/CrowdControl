@@ -118,11 +118,6 @@ class Home extends React.Component {
 
     }
 
-    createButtonClicked() {
-
-
-    }
-
     snackbarOpen(message, severity) {
 
         this.setState({ 

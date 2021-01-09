@@ -15,6 +15,11 @@ const styles = {
 
 class Create extends React.Component {
 
+    createButtonClicked() {
+
+
+    }
+
     constructor(props) {
         super(props)
         this.state = {
@@ -71,7 +76,8 @@ class Create extends React.Component {
                         <Button
                             variant="contained"
                             color="primary"
-                            style={styles.componentDimensions}>
+                            style={styles.componentDimensions}
+                            onClick={this.createButtonClicked.bind(this)}>
                             Create
                         </Button>
                     </Grid>
