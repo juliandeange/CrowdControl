@@ -54,6 +54,28 @@ class Create extends React.Component {
                             onChange={this.storeCodeChanged} 
                         />
                     </Grid> 
+
+                    <Grid item xs={12}>
+                        <TextField
+                            style={styles.componentDimensions}
+                            error={!this.state.isValid}
+                            id="outlined-error"
+                            label="Enter Store Capacity"
+                            variant="outlined"
+                            value={this.state.storeCode}
+                            onChange={this.storeCodeChanged} 
+                        />
+                    </Grid> 
+
+                    <Grid item xs={12}>
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            style={styles.componentDimensions}>
+                            Create
+                        </Button>
+                    </Grid>
+
                 </Grid>
 
             </div>
