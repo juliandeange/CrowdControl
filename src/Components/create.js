@@ -4,12 +4,6 @@ import Grid from '@material-ui/core/Grid'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 
-import {
-    MuiPickersUtilsProvider,
-    KeyboardTimePicker,
-    KeyboardDatePicker,
-  } from '@material-ui/pickers';
-
 const styles = {
 
     componentDimensions: {
@@ -88,21 +82,34 @@ class Create extends React.Component {
                             onChange={this.storeCodeChanged} 
                         />
                     </Grid> 
-
                     <Grid item xs={12}>
                         <TextField
-                            id="datetime-local"
-                            label="Expiry"
-                            type="datetime-local"
-                            // defaultValue={this.state.expiry}
-                            defaultValue={new Date().getFullYear() + "-" + new Date().getMonth() + 1 + "-" + new Date().getDate() + "T" + "23:59"}
-                            // defaultValue="2021-01-10T23:59"
+                            label="Expiry Day"
+                            type="date"
+                            defaultValue="2017-05-24"
+                            style={styles.componentDimensions}
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+                        />
+                        <TextField
+                            label="Expiry Time"
+                            type="time"
+                            defaultValue="07:30"
                             style={styles.componentDimensions}
                             InputLabelProps={{
                             shrink: true,
-                        }}
-                    />
+                            }}
+                            inputProps={{
+                                step: 300, // 5 min
+                            }}
+                        />
                     </Grid>
+
+                    <Grid item xs={12}>
+                        
+                    </Grid>
+                           
 
                     <Grid item xs={12}>
                         <Button
