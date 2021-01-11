@@ -2,6 +2,7 @@ import React from 'react'
 import firebase from 'firebase'
 import "./firestore"
 import Counter from './Components/counter'
+import Create from './Components/create'
 
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
@@ -61,6 +62,8 @@ class Home extends React.Component {
             snackSeverity: "",
             snackMessage: "",
 
+            showCreatePage: false
+
         }
     }
 
@@ -118,6 +121,12 @@ class Home extends React.Component {
 
     }
 
+    createButtonClicked() {
+
+        this.setState({ showCreatePage: true })
+
+    }
+
     snackbarOpen(message, severity) {
 
         this.setState({ 
@@ -165,14 +174,15 @@ class Home extends React.Component {
                                 <IconButton edge="end" style={styles.menuButton} color="inherit" aria-label="menu">
                                     <HomeRoundedIcon />
                                 </IconButton>
-                                <IconButton edge="end" style={styles.menuButton} color="inherit" aria-label="menu">
+                                <IconButton edge="end" style={styles.menuButton} color="inherit" aria-label="menu"
+                                            onClick={this.createButtonClicked.bind(this)}>
                                     <AddCircleOutlineOutlinedIcon />
                                 </IconButton>
                             </div>
                             }
                         </Toolbar>
                     </AppBar>
-                </div>      
+                </div>   
 
                 {this.state.connectedTo === "" ?              
 
@@ -202,7 +212,7 @@ class Home extends React.Component {
                     <div style={styles.centerPage}>
                         <Counter count={this.state.count} connectedTo={this.state.connectedTo} />
                     </div>
-                }
+               }
                 <Snackbar open={this.state.snackOpen} autoHideDuration={6000} onClose={this.snackbarClose.bind(this)}>
                     <Alert onClose={this.snackbarClose.bind(this)} severity={this.state.snackSeverity}>
                         {this.state.snackMessage}
