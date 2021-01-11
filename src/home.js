@@ -144,7 +144,6 @@ class Home extends React.Component {
         return(
 
             <div>
-
                 <div style={styles.root}>
                     <AppBar position="static">
                         <Toolbar>

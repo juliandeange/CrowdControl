@@ -86,16 +86,19 @@ class Create extends React.Component {
                         <TextField
                             label="Expiry Day"
                             type="date"
-                            defaultValue="2017-05-24"
+                            // defaultValue="2017-05-24"
+                            defaultValue={new Date().getFullYear() + "-" + new Date().getMonth() + 1 + "-" + new Date().getDate()}
                             style={styles.componentDimensions}
                             InputLabelProps={{
                                 shrink: true,
                             }}
                         />
+                    </Grid>
+                    <Grid item xs={12}>
                         <TextField
                             label="Expiry Time"
                             type="time"
-                            defaultValue="07:30"
+                            defaultValue="23:59"
                             style={styles.componentDimensions}
                             InputLabelProps={{
                             shrink: true,
@@ -105,12 +108,6 @@ class Create extends React.Component {
                             }}
                         />
                     </Grid>
-
-                    <Grid item xs={12}>
-                        
-                    </Grid>
-                           
-
                     <Grid item xs={12}>
                         <Button
                             variant="contained"
