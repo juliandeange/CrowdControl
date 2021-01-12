@@ -62,7 +62,7 @@ class Home extends React.Component {
             snackSeverity: "",
             snackMessage: "",
 
-            showCreatePage: false
+            visibleForm: "home"
 
         }
     }
@@ -96,6 +96,7 @@ class Home extends React.Component {
 
                 this.setState({ 
                     connectedTo: this.state.storeCode,
+                    visibleForm: "counter",
                     count: query.data().count
                 })
 
@@ -115,7 +116,10 @@ class Home extends React.Component {
     disconnectButtonClicked() {
 
         listener();
-        this.setState({connectedTo: ""})
+        this.setState({
+            connectedTo: "",
+            visibleForm: "home"
+        })
 
         this.snackbarOpen("Disconnected from store", "info")
 
@@ -123,7 +127,13 @@ class Home extends React.Component {
 
     createButtonClicked() {
 
-        this.setState({ showCreatePage: true })
+        this.setState({ visibleForm: "create" })
+
+    }
+
+    homeButtonClicked() {
+
+        this.setState({ visibleForm: "home" })
 
     }
 
@@ -150,6 +160,14 @@ class Home extends React.Component {
         document.body.classList.add("no-sroll")
         document.body.classList.add("background-red");
 
+        switch (this.state.visibleForm) {
+
+            case "test":
+                return <div>hello</div>
+                break;
+
+        }
+
         return(
 
             <div>
@@ -159,7 +177,7 @@ class Home extends React.Component {
                             <Typography variant="h6" style={styles.title}>
                                 Occupancy Counter
                             </Typography>
-                            {this.state. connectedTo !== "" ? 
+                            {this.state.connectedTo !== "" ? 
                             <div>
                                 <Button
                                     color="secondary"
@@ -171,7 +189,8 @@ class Home extends React.Component {
                             </div>
                             :
                             <div>
-                                <IconButton edge="end" style={styles.menuButton} color="inherit" aria-label="menu">
+                                <IconButton edge="end" style={styles.menuButton} color="inherit" aria-label="menu"
+                                            onClick={this.homeButtonClicked.bind(this)}>
                                     <HomeRoundedIcon />
                                 </IconButton>
                                 <IconButton edge="end" style={styles.menuButton} color="inherit" aria-label="menu"
@@ -184,7 +203,7 @@ class Home extends React.Component {
                     </AppBar>
                 </div>   
 
-                {this.state.connectedTo === "" ?              
+                {this.state.visibleForm === "home" ?              
 
                     <div style={styles.centerPage}>
                         <div style={{marginBottom: "10px"}} >
@@ -208,11 +227,22 @@ class Home extends React.Component {
                             </Button>    
                         </div>
                     </div>
-                    :
-                    <div style={styles.centerPage}>
-                        <Counter count={this.state.count} connectedTo={this.state.connectedTo} />
-                    </div>
-               }
+
+                    : this.state.visibleForm === "counter" ?
+
+                        <div style={styles.centerPage}>
+                            <Counter count={this.state.count} connectedTo={this.state.connectedTo} />
+                        </div>
+
+                    : this.state.visibleForm === "create" ? 
+                
+                        <div style={styles.centerPage}> 
+                            <Create />   
+                        </div>
+                    
+                    : null
+
+                }
                 <Snackbar open={this.state.snackOpen} autoHideDuration={6000} onClose={this.snackbarClose.bind(this)}>
                     <Alert onClose={this.snackbarClose.bind(this)} severity={this.state.snackSeverity}>
                         {this.state.snackMessage}
