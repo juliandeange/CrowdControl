@@ -44,7 +44,7 @@ class Create extends React.Component {
         return (
             <div style={{padding: 10}}>
 
-                <Grid container spacing={1}>
+                <Grid container spacing={1} style={{textAlign: "center"}}>
 
                     <Grid item xs={12}>
                         <TextField
