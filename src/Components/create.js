@@ -23,6 +23,8 @@ class Create extends React.Component {
             storeName: "",
             storeCode: "",
             storeCapacity: "",
+            expiryDay: new Date().getFullYear() + "-" + new Date().getMonth() + 1 + "-" + new Date().getDate(),
+            expiryTime: "23:59",
 
             expiry: "",
             isValid: true
@@ -98,10 +100,13 @@ class Create extends React.Component {
                     </Grid> 
                     <Grid item xs={12}>
                         <TextField
+                            name="expiryDay"
                             label="Expiry Day"
                             type="date"
                             // defaultValue="2017-05-24"
-                            defaultValue={new Date().getFullYear() + "-" + new Date().getMonth() + 1 + "-" + new Date().getDate()}
+                            // defaultValue={new Date().getFullYear() + "-" + new Date().getMonth() + 1 + "-" + new Date().getDate()}
+                            value={this.state.expiryDay}
+                            onChange={this.handleChange}
                             style={styles.componentDimensions}
                             InputLabelProps={{
                                 shrink: true,
@@ -110,12 +115,15 @@ class Create extends React.Component {
                     </Grid>
                     <Grid item xs={12}>
                         <TextField
+                            name="expiryTime"
                             label="Expiry Time"
                             type="time"
-                            defaultValue="23:59"
+                            // defaultValue="23:59"
+                            value={this.state.expiryTime}
+                            onChange={this.handleChange}
                             style={styles.componentDimensions}
                             InputLabelProps={{
-                            shrink: true,
+                                shrink: true,
                             }}
                             inputProps={{
                                 step: 300, // 5 min
