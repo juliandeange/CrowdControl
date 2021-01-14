@@ -17,7 +17,12 @@ class Create extends React.Component {
 
     constructor(props) {
         super(props)
+        this.handleChange = this.handleChange.bind(this)
         this.state = {
+
+            storeName: "",
+            storeCode: "",
+            storeCapacity: "",
 
             expiry: "",
             isValid: true
@@ -38,6 +43,12 @@ class Create extends React.Component {
         this.setState({ expiry: dateString })
 
     }
+
+    handleChange(event) {
+
+        this.setState({ [event.target.name]: event.target.value });
+
+    }
     
     render() {
 
@@ -48,38 +59,41 @@ class Create extends React.Component {
 
                     <Grid item xs={12}>
                         <TextField
+                            name="storeName"
                             style={styles.componentDimensions}
                             error={!this.state.isValid}
                             id="outlined-error"
                             label="Enter Store Name"
                             variant="outlined"
-                            value={this.state.storeCode}
-                            onChange={this.storeCodeChanged} 
+                            value={this.state.storeName}
+                            onChange={this.handleChange} 
                         />
                     </Grid> 
 
                     <Grid item xs={12}>
                         <TextField
+                            name="storeCode"
                             style={styles.componentDimensions}
                             error={!this.state.isValid}
                             id="outlined-error"
                             label="Enter Store Code"
                             variant="outlined"
                             value={this.state.storeCode}
-                            onChange={this.storeCodeChanged} 
+                            onChange={this.handleChange} 
                         />
                     </Grid> 
 
                     <Grid item xs={12}>
                         <TextField
+                            name="storeCapacity"
                             style={styles.componentDimensions}
                             error={!this.state.isValid}
                             id="outlined-error"
                             label="Enter Store Capacity"
                             variant="outlined"
                             type="number"
-                            value={this.state.storeCode}
-                            onChange={this.storeCodeChanged} 
+                            value={this.state.storeCapacity}
+                            onChange={this.handleChange} 
                         />
                     </Grid> 
                     <Grid item xs={12}>
