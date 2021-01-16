@@ -133,20 +133,6 @@ class Create extends React.Component {
                             onChange={this.handleChange} 
                         />
                     </Grid> 
-
-                    <Grid item xs={12}>
-                        <TextField
-                            name="storeCode"
-                            style={styles.componentDimensions}
-                            error={!this.state.storeCodeValid}
-                            id="outlined-error"
-                            label="Enter Store Code"
-                            variant="outlined"
-                            value={this.state.storeCode}
-                            onChange={this.handleChange} 
-                        />
-                    </Grid> 
-
                     <Grid item xs={12}>
                         <TextField
                             name="storeCapacity"
@@ -157,6 +143,18 @@ class Create extends React.Component {
                             variant="outlined"
                             type="number"
                             value={this.state.storeCapacity}
+                            onChange={this.handleChange} 
+                        />
+                    </Grid> 
+                    <Grid item xs={12}>
+                        <TextField
+                            name="storeCode"
+                            style={styles.componentDimensions}
+                            error={!this.state.storeCodeValid}
+                            id="outlined-error"
+                            label="Enter Store Code"
+                            variant="outlined"
+                            value={this.state.storeCode}
                             onChange={this.handleChange} 
                         />
                     </Grid> 
@@ -176,24 +174,6 @@ class Create extends React.Component {
                             }}
                         />
                     </Grid>
-                    {/* <Grid item xs={12}>
-                        <TextField
-                            name="expiryTime"
-                            label="Expiry Time"
-                            type="time"
-                            // defaultValue="23:59"
-                            error={!this.state.storeExpiryTimeValid}
-                            value={this.state.expiryTime}
-                            onChange={this.handleChange}
-                            style={styles.componentDimensions}
-                            InputLabelProps={{
-                                shrink: true,
-                            }}
-                            inputProps={{
-                                step: 300, // 5 min
-                            }}
-                        />
-                    </Grid> */}
                     <Grid item xs={12}>
                         <Button
                             variant="contained"
