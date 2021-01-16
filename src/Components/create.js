@@ -25,13 +25,11 @@ class Create extends React.Component {
             storeCode: "",
             storeCapacity: "",
             expiryDay: new Date().getFullYear() + "-" + new Date().getMonth() + 1 + "-" + new Date().getDate(),
-            // expiryTime: "23:59",
 
             storeNameValid: true,
             storeCodeValid: true,
             storeCapacityValid: true,
             storeExpiryDayValid: true,
-            // storeExpiryTimeValid: true
 
         }
     }
@@ -53,21 +51,6 @@ class Create extends React.Component {
         if (this.state.storeName === "")
             name = false
 
-
-        // Check code
-        if (this.state.storeCode === "")
-            code = false
-        else{
-            var test = firebase.firestore().collection("StoreCounts").doc(this.state.storeCode).get()
-            .then((docSnapshot) => {
-                if (docSnapshot.exists){
-                }
-                else 
-                    code = false
-
-            });
-        }
-
         // Check capacity
         if (this.state.storeCapacity <= 0)
             capacity = false
@@ -83,15 +66,29 @@ class Create extends React.Component {
         date.setHours(23)
         date.setMinutes(59)
 
-        if (name && code && capacity && expiry) {
+        if (name && capacity && expiry) {
 
-            // create
+            // check if store code is valid
 
+            if (this.state.storeCode === "")
+                code = false
+            else {
+                firebase.firestore().collection("StoreCounts").doc(this.state.storeCode).get()
+                .then((docSnapshot) => {
+                    if (docSnapshot.exists) {
+                        code = false
+                    }
+                else {
+                    // create
+                    console.log("OK to create")
+                } 
+                });
+            }
         }
         else {
             this.setState({
                 storeNameValid: name,
-                storeCodeValid: code,
+                // storeCodeValid: code,
                 storeCapacityValid: capacity,
                 storeExpiryDayValid: expiry,
             })
