@@ -1,4 +1,5 @@
 import React from 'react'
+import firebase from 'firebase'
 
 import Grid from '@material-ui/core/Grid'
 import TextField from '@material-ui/core/TextField'
@@ -26,14 +27,38 @@ class Create extends React.Component {
             expiryDay: new Date().getFullYear() + "-" + new Date().getMonth() + 1 + "-" + new Date().getDate(),
             expiryTime: "23:59",
 
-            expiry: "",
-            isValid: true
+            storeNameValid: true,
+            storeCodeValid: true,
+            storeCapacityValid: true,
+            storeExpiryDayValid: true,
+            storeExpiryTimeValid: true
 
         }
     }
 
     createButtonClicked() {
 
+        // var connectedStore = firebase.firestore().collection("StoreCounts").doc(this.props.connectedTo);
+        // firebase.firestore().collection("StoreCounts").doc("NEWDOC").set({
+        //     field1: 1,
+        //     field2: "2"
+        // })
+
+        // Check name
+        // if (storeName !== "")
+
+        // Check code
+
+        // Check capacity
+
+        //Check expiry Date and Time
+
+        var test = firebase.firestore().collection("StoreCounts").doc("AAA0012").get()
+        .then((docSnapshot) => {
+            if (docSnapshot.exists) {
+                console.log("found")
+            }
+        });
 
     }
 
@@ -139,9 +164,7 @@ class Create extends React.Component {
                             Create
                         </Button>
                     </Grid>
-
                 </Grid>
-
             </div>
         )
     }
