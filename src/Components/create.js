@@ -25,13 +25,13 @@ class Create extends React.Component {
             storeCode: "",
             storeCapacity: "",
             expiryDay: new Date().getFullYear() + "-" + new Date().getMonth() + 1 + "-" + new Date().getDate(),
-            expiryTime: "23:59",
+            // expiryTime: "23:59",
 
             storeNameValid: true,
             storeCodeValid: true,
             storeCapacityValid: true,
             storeExpiryDayValid: true,
-            storeExpiryTimeValid: true
+            // storeExpiryTimeValid: true
 
         }
     }
@@ -44,21 +44,58 @@ class Create extends React.Component {
         //     field2: "2"
         // })
 
+        var name = true
+        var code = true
+        var capacity = true
+        var expiry = true
+
         // Check name
-        // if (storeName !== "")
+        if (this.state.storeName === "")
+            name = false
+
 
         // Check code
+        if (this.state.storeCode === "")
+            code = false
+        else{
+            var test = firebase.firestore().collection("StoreCounts").doc(this.state.storeCode).get()
+            .then((docSnapshot) => {
+                if (docSnapshot.exists){
+                }
+                else 
+                    code = false
+
+            });
+        }
 
         // Check capacity
+        if (this.state.storeCapacity <= 0)
+            capacity = false
 
         //Check expiry Date and Time
+        var dateArray = this.state.expiryDay.split("-")
+        var date = new Date(dateArray[0], dateArray[1] - 1, dateArray[2])
 
-        var test = firebase.firestore().collection("StoreCounts").doc("AAA0012").get()
-        .then((docSnapshot) => {
-            if (docSnapshot.exists) {
-                console.log("found")
-            }
-        });
+        var today = new Date().getFullYear() + "-" + new Date().getMonth() + 1 + "-" + new Date().getDate()
+        if (this.state.expiryDay < today){
+            expiry = false
+        }
+        date.setHours(23)
+        date.setMinutes(59)
+
+        if (name && code && capacity && expiry) {
+
+            // create
+
+        }
+        else {
+            this.setState({
+                storeNameValid: name,
+                storeCodeValid: code,
+                storeCapacityValid: capacity,
+                storeExpiryDayValid: expiry,
+            })
+        }
 
     }
 
@@ -88,7 +125,7 @@ class Create extends React.Component {
                         <TextField
                             name="storeName"
                             style={styles.componentDimensions}
-                            error={!this.state.isValid}
+                            error={!this.state.storeNameValid}
                             id="outlined-error"
                             label="Enter Store Name"
                             variant="outlined"
@@ -101,7 +138,7 @@ class Create extends React.Component {
                         <TextField
                             name="storeCode"
                             style={styles.componentDimensions}
-                            error={!this.state.isValid}
+                            error={!this.state.storeCodeValid}
                             id="outlined-error"
                             label="Enter Store Code"
                             variant="outlined"
@@ -114,7 +151,7 @@ class Create extends React.Component {
                         <TextField
                             name="storeCapacity"
                             style={styles.componentDimensions}
-                            error={!this.state.isValid}
+                            error={!this.state.storeCapacityValid}
                             id="outlined-error"
                             label="Enter Store Capacity"
                             variant="outlined"
@@ -130,6 +167,7 @@ class Create extends React.Component {
                             type="date"
                             // defaultValue="2017-05-24"
                             // defaultValue={new Date().getFullYear() + "-" + new Date().getMonth() + 1 + "-" + new Date().getDate()}
+                            error={!this.state.storeExpiryDayValid}
                             value={this.state.expiryDay}
                             onChange={this.handleChange}
                             style={styles.componentDimensions}
@@ -138,12 +176,13 @@ class Create extends React.Component {
                             }}
                         />
                     </Grid>
-                    <Grid item xs={12}>
+                    {/* <Grid item xs={12}>
                         <TextField
                             name="expiryTime"
                             label="Expiry Time"
                             type="time"
                             // defaultValue="23:59"
+                            error={!this.state.storeExpiryTimeValid}
                             value={this.state.expiryTime}
                             onChange={this.handleChange}
                             style={styles.componentDimensions}
@@ -154,7 +193,7 @@ class Create extends React.Component {
                                 step: 300, // 5 min
                             }}
                         />
-                    </Grid>
+                    </Grid> */}
                     <Grid item xs={12}>
                         <Button
                             variant="contained"
