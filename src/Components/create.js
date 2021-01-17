@@ -71,12 +71,19 @@ class Create extends React.Component {
             // check if store code is valid
 
             if (this.state.storeCode === "")
-                code = false
+                this.setState({ storeCodeValid: false })
             else {
                 firebase.firestore().collection("StoreCounts").doc(this.state.storeCode).get()
                 .then((docSnapshot) => {
                     if (docSnapshot.exists) {
-                        code = false
+                        this.setState({
+
+                            storeNameValid: name,
+                            storeCodeValid: false,
+                            storeCapacityValid: capacity,
+                            storeExpiryDayValid: expiry,
+
+                        })
                     }
                 else {
                     // create
@@ -88,7 +95,7 @@ class Create extends React.Component {
         else {
             this.setState({
                 storeNameValid: name,
-                // storeCodeValid: code,
+                storeCodeValid: code,
                 storeCapacityValid: capacity,
                 storeExpiryDayValid: expiry,
             })
@@ -96,6 +103,15 @@ class Create extends React.Component {
 
     }
 
+    handleChange(event) {
+
+        if (event.target.name === "storeCode")
+            this.setState({ [event.target.name]: event.target.value.toUpperCase() })
+        else
+            this.setState({ [event.target.name]: event.target.value });
+
+    }
+    
     componentDidMount() {
 
         var currentDate = new Date();
@@ -105,12 +121,6 @@ class Create extends React.Component {
 
     }
 
-    handleChange(event) {
-
-        this.setState({ [event.target.name]: event.target.value });
-
-    }
-    
     render() {
 
         return (
@@ -135,7 +145,6 @@ class Create extends React.Component {
                             name="storeCapacity"
                             style={styles.componentDimensions}
                             error={!this.state.storeCapacityValid}
-                            id="outlined-error"
                             label="Enter Store Capacity"
                             variant="outlined"
                             type="number"
@@ -148,7 +157,6 @@ class Create extends React.Component {
                             name="storeCode"
                             style={styles.componentDimensions}
                             error={!this.state.storeCodeValid}
-                            id="outlined-error"
                             label="Enter Store Code"
                             variant="outlined"
                             value={this.state.storeCode}
