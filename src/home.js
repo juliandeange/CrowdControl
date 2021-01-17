@@ -138,7 +138,7 @@ class Home extends React.Component {
 
     homeButtonClicked() {
 
-        this.setState({ visibleForm: "home" })
+        this.setState({ visibleForm: "home", isValid: true })
 
     }
 
@@ -164,14 +164,6 @@ class Home extends React.Component {
 
         document.body.classList.add("no-sroll")
         document.body.classList.add("background-red");
-
-        switch (this.state.visibleForm) {
-
-            case "test":
-                return <div>hello</div>
-                break;
-
-        }
 
         return(
 

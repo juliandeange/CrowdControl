@@ -88,9 +88,8 @@ class Create extends React.Component {
                         })
                     }
                 else {
-                    // create
-                    // console.log("OK to create")
 
+                    // create
                     firebase.firestore().collection(CollectionName).doc(this.state.storeCode).set({
 
                         name: this.state.storeName,
@@ -99,7 +98,6 @@ class Create extends React.Component {
                         count: 0
 
                     })
-
 
                     // Invoke fundtion to show the home page
                     this.props.action()
@@ -131,6 +129,7 @@ class Create extends React.Component {
     componentDidMount() {
 
         var currentDate = new Date();
+        // eslint-disable-next-line
         var dateString = currentDate.getFullYear() + "-" + currentDate.getMonth() + 1 + "-" + currentDate.getDate() + "T" + "23:59"
 
         this.setState({ expiry: dateString })
