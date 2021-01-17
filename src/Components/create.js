@@ -88,6 +88,10 @@ class Create extends React.Component {
                 else {
                     // create
                     console.log("OK to create")
+
+                    // Invoke fundtion to show the home page
+                    this.props.action()
+
                 } 
                 });
             }

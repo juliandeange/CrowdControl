@@ -50,7 +50,10 @@ class Home extends React.Component {
 
     constructor(props) {
 
-        super(props);
+        super(props)
+
+        this.homeButtonClicked = this.homeButtonClicked.bind(this)
+
         this.state = {
 
             storeCode: "",
@@ -237,7 +240,7 @@ class Home extends React.Component {
                     : this.state.visibleForm === "create" ? 
                 
                         <div style={styles.centerPage}> 
-                            <Create />   
+                            <Create action={this.homeButtonClicked} />   
                         </div>
                     
                     : null
