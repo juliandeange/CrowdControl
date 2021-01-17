@@ -7,6 +7,8 @@ import IconButton from '@material-ui/core/IconButton'
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown'
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp'
 
+const CollectionName = "Stores"
+
 const styles = {
     arrowSize: {
         height: 50,
@@ -29,7 +31,7 @@ class Counter extends React.Component {
 
     upArrowClicked() {
 
-        var connectedStore = firebase.firestore().collection("StoreCounts").doc(this.props.connectedTo);
+        var connectedStore = firebase.firestore().collection(CollectionName).doc(this.props.connectedTo);
 
         return connectedStore.update({
             count: firebase.firestore.FieldValue.increment(1)
@@ -39,7 +41,7 @@ class Counter extends React.Component {
 
     downArrowClicked() {
 
-        var connectedStore = firebase.firestore().collection("StoreCounts").doc(this.props.connectedTo);
+        var connectedStore = firebase.firestore().collection(CollectionName).doc(this.props.connectedTo);
 
         return connectedStore.update({
             count: firebase.firestore.FieldValue.increment(-1)

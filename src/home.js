@@ -20,6 +20,8 @@ function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
+const CollectionName = "Stores"
+
 var listener = {};
 
 const styles = {
@@ -85,12 +87,12 @@ class Home extends React.Component {
             return;
         }
             
-        firebase.firestore().collection("StoreCounts").doc(this.state.storeCode).get().then((query) => {
+        firebase.firestore().collection(CollectionName).doc(this.state.storeCode).get().then((query) => {
 
             // If connected successfully
             if (query.data() !== undefined) {
 
-                listener = firebase.firestore().collection("StoreCounts").doc(this.state.storeCode).onSnapshot({
+                listener = firebase.firestore().collection(CollectionName).doc(this.state.storeCode).onSnapshot({
                     includeMetadataChanges: false
                 }, 
                 (doc) => {

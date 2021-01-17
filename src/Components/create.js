@@ -5,6 +5,8 @@ import Grid from '@material-ui/core/Grid'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 
+const CollectionName = "Stores"
+
 const styles = {
 
     componentDimensions: {
@@ -73,7 +75,7 @@ class Create extends React.Component {
             if (this.state.storeCode === "")
                 this.setState({ storeCodeValid: false })
             else {
-                firebase.firestore().collection("StoreCounts").doc(this.state.storeCode).get()
+                firebase.firestore().collection(CollectionName).doc(this.state.storeCode).get()
                 .then((docSnapshot) => {
                     if (docSnapshot.exists) {
                         this.setState({
@@ -87,7 +89,17 @@ class Create extends React.Component {
                     }
                 else {
                     // create
-                    console.log("OK to create")
+                    // console.log("OK to create")
+
+                    firebase.firestore().collection(CollectionName).doc(this.state.storeCode).set({
+
+                        name: this.state.storeName,
+                        capacity: parseInt(this.state.storeCapacity),
+                        expiry: date,
+                        count: 0
+
+                    })
+
 
                     // Invoke fundtion to show the home page
                     this.props.action()
