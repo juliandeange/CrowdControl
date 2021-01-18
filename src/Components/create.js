@@ -4,6 +4,12 @@ import firebase from 'firebase'
 import Grid from '@material-ui/core/Grid'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
+import Snackbar from '@material-ui/core/Snackbar'
+import MuiAlert from '@material-ui/lab/Alert'
+
+function Alert(props) {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 const CollectionName = "Stores"
 
@@ -33,16 +39,14 @@ class Create extends React.Component {
             storeCapacityValid: true,
             storeExpiryDayValid: true,
 
+            snackOpen: false,
+            snackSeverity: "",
+            snackMessage: "",
+
         }
     }
 
     createButtonClicked() {
-
-        // var connectedStore = firebase.firestore().collection("StoreCounts").doc(this.props.connectedTo);
-        // firebase.firestore().collection("StoreCounts").doc("NEWDOC").set({
-        //     field1: 1,
-        //     field2: "2"
-        // })
 
         var name = true
         var code = true
@@ -107,6 +111,9 @@ class Create extends React.Component {
             }
         }
         else {
+
+            this.snackbarOpen("There are one or more errors", "error")
+
             this.setState({
                 storeNameValid: name,
                 storeCodeValid: code,
@@ -124,6 +131,24 @@ class Create extends React.Component {
         else
             this.setState({ [event.target.name]: event.target.value });
 
+    }
+
+    snackbarOpen(message, severity) {
+
+        this.setState({ 
+            snackOpen: true, 
+            snackMessage: message, 
+            snackSeverity: severity 
+        })
+        
+    }
+    
+    snackbarClose() {
+        
+        this.setState({ 
+            snackOpen: false, 
+        })
+        
     }
     
     componentDidMount() {
@@ -189,6 +214,7 @@ class Create extends React.Component {
                             value={this.state.expiryDay}
                             onChange={this.handleChange}
                             style={styles.componentDimensions}
+                            // style={{ width: 194, height: 55}}
                             InputLabelProps={{
                                 shrink: true,
                             }}
@@ -204,6 +230,11 @@ class Create extends React.Component {
                         </Button>
                     </Grid>
                 </Grid>
+                {/* <Snackbar open={this.state.snackOpen} autoHideDuration={6000} onClose={this.snackbarClose.bind(this)}>
+                    <Alert onClose={this.snackbarClose.bind(this)} severity={this.state.snackSeverity}>
+                        {this.state.snackMessage}
+                    </Alert>
+                </Snackbar> */}
             </div>
         )
     }
