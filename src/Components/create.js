@@ -39,10 +39,6 @@ class Create extends React.Component {
             storeCapacityValid: true,
             storeExpiryDayValid: true,
 
-            snackOpen: false,
-            snackSeverity: "",
-            snackMessage: "",
-
         }
     }
 
@@ -104,7 +100,7 @@ class Create extends React.Component {
                     })
 
                     // Invoke fundtion to show the home page
-                    this.props.action()
+                    this.props.invokeHomeButton()
 
                 } 
                 });
@@ -112,7 +108,7 @@ class Create extends React.Component {
         }
         else {
 
-            this.snackbarOpen("There are one or more errors", "error")
+            this.props.invokeSnackbar("There are one or more errors", "error")
 
             this.setState({
                 storeNameValid: name,
@@ -131,24 +127,6 @@ class Create extends React.Component {
         else
             this.setState({ [event.target.name]: event.target.value });
 
-    }
-
-    snackbarOpen(message, severity) {
-
-        this.setState({ 
-            snackOpen: true, 
-            snackMessage: message, 
-            snackSeverity: severity 
-        })
-        
-    }
-    
-    snackbarClose() {
-        
-        this.setState({ 
-            snackOpen: false, 
-        })
-        
     }
     
     componentDidMount() {
@@ -230,11 +208,6 @@ class Create extends React.Component {
                         </Button>
                     </Grid>
                 </Grid>
-                {/* <Snackbar open={this.state.snackOpen} autoHideDuration={6000} onClose={this.snackbarClose.bind(this)}>
-                    <Alert onClose={this.snackbarClose.bind(this)} severity={this.state.snackSeverity}>
-                        {this.state.snackMessage}
-                    </Alert>
-                </Snackbar> */}
             </div>
         )
     }
