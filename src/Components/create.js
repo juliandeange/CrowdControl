@@ -94,7 +94,7 @@ class Create extends React.Component {
                     })
 
                     // Invoke fundtion to show the home page
-                    this.props.invokeSnackbar("Store created", "success")
+                    this.props.invokeSnackbar("Store " + this.state.storeName + " (" + this.state.storeCode + ") has been created", "success")
                     this.props.invokeHomeButton()
 
                 } 

@@ -26,7 +26,6 @@ class Counter extends React.Component {
             // count: 0,
             
         }
-
     }
 
     upArrowClicked() {
@@ -65,6 +64,15 @@ class Counter extends React.Component {
                         <KeyboardArrowDownIcon style={styles.arrowSize} />
                     </IconButton>
                 </Grid> 
+
+                <Grid item xs={12} style={{textAlign: "center"}}>
+                    {/* Fortinos (AAA001) */}
+                    {this.props.connectedName} ({this.props.connectedTo})
+                </Grid>
+                <Grid item xs={12} style={{textAlign: "center"}}>
+                    Capacity: {this.props.connectedCapacity}
+                </Grid>
+            
             </div>
 
         )
