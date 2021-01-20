@@ -9,8 +9,8 @@ import Button from '@material-ui/core/Button'
 import IconButton from '@material-ui/core/IconButton'
 import Snackbar from '@material-ui/core/Snackbar'
 import MuiAlert from '@material-ui/lab/Alert'
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
+import AppBar from '@material-ui/core/AppBar'
+import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 
 import AddCircleOutlineOutlinedIcon from '@material-ui/icons/AddCircleOutlineOutlined'
@@ -31,6 +31,20 @@ const styles = {
         top: "50%", 
         left: "50%",
         transform: "translate(-50%, -50%)"
+    },
+    topThird: {
+        position: "fixed",
+        top: "33%",
+        left: "50%",
+        transform: "translate(-50%, -50%)",
+        textAlign: "center"
+    },
+    bottomThird: {
+        position: "fixed",
+        top: "66%",
+        left: "50%",
+        transform: "translate(-50%, -50%)",
+        textAlign: "center"
     },
     componentDimensions: {
         width: 194,
@@ -55,6 +69,7 @@ class Home extends React.Component {
         super(props)
 
         this.homeButtonClicked = this.homeButtonClicked.bind(this)
+        this.snackbarOpen = this.snackbarOpen.bind(this)
 
         this.state = {
 
@@ -62,6 +77,8 @@ class Home extends React.Component {
             isValid: true,
             count: 0,
             connectedTo: "",
+            connectedName: "",
+            connectedCapacity: 0,
 
             snackOpen: false,
             snackSeverity: "",
@@ -96,13 +113,18 @@ class Home extends React.Component {
                     includeMetadataChanges: false
                 }, 
                 (doc) => {
-                    this.setState({ count: doc.data().count })
+                    this.setState({ 
+                        count: doc.data().count,
+ 
+                    })
                 });
 
                 this.setState({ 
                     connectedTo: this.state.storeCode,
                     visibleForm: "counter",
-                    count: query.data().count
+                    count: query.data().count,
+                    connectedName: query.data().name,
+                    connectedCapacity: query.data().capacity
                 })
 
                 this.snackbarOpen("Successfully Connected!", "success")
@@ -226,15 +248,28 @@ class Home extends React.Component {
                     </div>
 
                     : this.state.visibleForm === "counter" ?
-
-                        <div style={styles.centerPage}>
-                            <Counter count={this.state.count} connectedTo={this.state.connectedTo} />
+                        <div style={{fontWeight: "bold"}}>
+                            <div style={styles.topThird}>
+                                <div>
+                                    {this.state.connectedName} ({this.state.connectedTo})
+                                </div>
+                                <div>
+                                    Capacity: {this.state.connectedCapacity}
+                                </div>
+                            </div>
+                            <div style={styles.bottomThird}>
+                                <Counter 
+                                    count={this.state.count} 
+                                    connectedTo={this.state.connectedTo} 
+                                    connectedName={this.state.connectedName} 
+                                    connectedCapacity={this.state.connectedCapacity} />
+                            </div>
                         </div>
 
                     : this.state.visibleForm === "create" ? 
                 
                         <div style={styles.centerPage}> 
-                            <Create action={this.homeButtonClicked} />   
+                            <Create invokeHomeButton={this.homeButtonClicked} invokeSnackbar={this.snackbarOpen} />   
                         </div>
                     
                     : null
