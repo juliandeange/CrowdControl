@@ -68,6 +68,7 @@ class Create extends React.Component {
 
             if (this.state.storeCode === "")
                 this.setState({ storeCodeValid: false })
+                
             else {
                 firebase.firestore().collection(CollectionName).doc(this.state.storeCode).get()
                 .then((docSnapshot) => {

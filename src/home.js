@@ -250,12 +250,14 @@ class Home extends React.Component {
                     : this.state.visibleForm === "counter" ?
                         <div style={{fontWeight: "bold"}}>
                             <div style={styles.topThird}>
-                                <div>
-                                    {this.state.connectedName} ({this.state.connectedTo})
-                                </div>
-                                <div>
-                                    Capacity: {this.state.connectedCapacity}
-                                </div>
+                                <h3>
+                                    <div>
+                                        {this.state.connectedName} ({this.state.connectedTo})
+                                    </div>
+                                    <div>
+                                        Capacity: {this.state.connectedCapacity}
+                                    </div>
+                                </h3>
                             </div>
                             <div style={styles.bottomThird}>
                                 <Counter 
