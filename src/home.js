@@ -263,7 +263,6 @@ class Home extends React.Component {
                                 <Counter 
                                     count={this.state.count} 
                                     connectedTo={this.state.connectedTo} 
-                                    connectedName={this.state.connectedName} 
                                     connectedCapacity={this.state.connectedCapacity} />
                             </div>
                         </div>

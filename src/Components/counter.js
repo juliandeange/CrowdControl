@@ -57,7 +57,7 @@ class Counter extends React.Component {
                     <IconButton onClick={this.upArrowClicked.bind(this)}>
                         <KeyboardArrowUpIcon style={styles.arrowSize}/>
                     </IconButton>
-                    <h1>
+                    <h1 style={{ color: this.props.count > this.props.connectedCapacity ? "red" : "black" }}>
                         {this.props.count}
                     </h1>
                     <IconButton onClick={this.downArrowClicked.bind(this)}>
