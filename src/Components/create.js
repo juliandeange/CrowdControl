@@ -68,7 +68,7 @@ class Create extends React.Component {
 
             if (this.state.storeCode === "")
                 this.setState({ storeCodeValid: false })
-                
+
             else {
                 firebase.firestore().collection(CollectionName).doc(this.state.storeCode).get()
                 .then((docSnapshot) => {
@@ -96,7 +96,7 @@ class Create extends React.Component {
 
                     // Invoke fundtion to show the home page
                     this.props.invokeSnackbar("Store " + this.state.storeName + " (" + this.state.storeCode + ") has been created", "success")
-                    this.props.invokeHomeButton()
+                    this.props.invokeStoreCreated(this.state.storeCode)
 
                 } 
                 });

@@ -17,12 +17,12 @@ import AddCircleOutlineOutlinedIcon from '@material-ui/icons/AddCircleOutlineOut
 import HomeRoundedIcon from '@material-ui/icons/HomeRounded'
 
 function Alert(props) {
-    return <MuiAlert elevation={6} variant="filled" {...props} />;
+    return <MuiAlert elevation={6} variant="filled" {...props} />
 }
 
 const CollectionName = "Stores"
 
-var listener = {};
+var listener = {}
 
 const styles = {
 
@@ -50,15 +50,15 @@ const styles = {
         width: 194,
         height: 55
     },
-      root: {
+    root: {
         flexGrow: 1,
-      },
-      menuButton: {
+    },
+    menuButton: {
         marginRight: 2,
-      },
+    },
       title: {
         flexGrow: 1,
-      }
+    }
 
 }
 
@@ -68,6 +68,7 @@ class Home extends React.Component {
 
         super(props)
 
+        this.createStoreCompleted = this.createStoreCompleted.bind(this)
         this.homeButtonClicked = this.homeButtonClicked.bind(this)
         this.snackbarOpen = this.snackbarOpen.bind(this)
 
@@ -158,6 +159,16 @@ class Home extends React.Component {
 
     }
 
+    createStoreCompleted(storeCode) {
+
+        this.setState({
+            visibleForm: "home",
+            storeCode: storeCode,
+            isValid: true
+        })
+
+    }
+
     homeButtonClicked() {
 
         this.setState({ visibleForm: "home", isValid: true })
@@ -196,27 +207,29 @@ class Home extends React.Component {
                             <Typography variant="h6" style={styles.title}>
                                 Occupancy Counter
                             </Typography>
+
                             {this.state.connectedTo !== "" ? 
-                            <div>
-                                <Button
-                                    color="secondary"
-                                    variant="contained"
-                                    size="small"
-                                    onClick={this.disconnectButtonClicked.bind(this)}>
-                                    Disconnect
-                                </Button>
-                            </div>
+
+                                <div>
+                                    <Button
+                                        color="secondary"
+                                        variant="contained"
+                                        size="small"
+                                        onClick={this.disconnectButtonClicked.bind(this)}>
+                                        Disconnect
+                                    </Button>
+                                </div>
                             :
-                            <div>
-                                <IconButton edge="end" style={styles.menuButton} color="inherit" aria-label="menu"
-                                            onClick={this.homeButtonClicked.bind(this)}>
-                                    <HomeRoundedIcon />
-                                </IconButton>
-                                <IconButton edge="end" style={styles.menuButton} color="inherit" aria-label="menu"
-                                            onClick={this.createButtonClicked.bind(this)}>
-                                    <AddCircleOutlineOutlinedIcon />
-                                </IconButton>
-                            </div>
+                                <div>
+                                    <IconButton edge="end" style={styles.menuButton} color="inherit" aria-label="menu"
+                                                onClick={this.homeButtonClicked.bind(this)}>
+                                        <HomeRoundedIcon />
+                                    </IconButton>
+                                    <IconButton edge="end" style={styles.menuButton} color="inherit" aria-label="menu"
+                                                onClick={this.createButtonClicked.bind(this)}>
+                                        <AddCircleOutlineOutlinedIcon />
+                                    </IconButton>
+                                </div>
                             }
                         </Toolbar>
                     </AppBar>
@@ -225,7 +238,7 @@ class Home extends React.Component {
                 {this.state.visibleForm === "home" ?              
 
                     <div style={styles.centerPage}>
-                        <div style={{marginBottom: "10px"}} >
+                        <div style={{marginBottom: "10px"}}>
                             <TextField
                                 style={styles.componentDimensions}
                                 error={!this.state.isValid}
@@ -247,41 +260,39 @@ class Home extends React.Component {
                         </div>
                     </div>
 
-                    : this.state.visibleForm === "counter" ?
-                        <div style={{fontWeight: "bold"}}>
-                            <div style={styles.topThird}>
-                                <h3>
-                                    <div>
-                                        {this.state.connectedName} ({this.state.connectedTo})
-                                    </div>
-                                    <div>
-                                        Capacity: {this.state.connectedCapacity}
-                                    </div>
-                                </h3>
-                            </div>
-                            <div style={styles.bottomThird}>
-                                <Counter 
-                                    count={this.state.count} 
-                                    connectedTo={this.state.connectedTo} 
-                                    connectedCapacity={this.state.connectedCapacity} />
-                            </div>
+                : this.state.visibleForm === "counter" ?
+                    <div style={{fontWeight: "bold"}}>
+                        <div style={styles.topThird}>
+                            <h3>
+                                <div>
+                                    {this.state.connectedName} ({this.state.connectedTo})
+                                </div>
+                                <div>
+                                    Capacity: {this.state.connectedCapacity}
+                                </div>
+                            </h3>
                         </div>
+                        <div style={styles.bottomThird}>
+                            <Counter 
+                                count={this.state.count} 
+                                connectedTo={this.state.connectedTo} 
+                                connectedCapacity={this.state.connectedCapacity} />
+                        </div>
+                    </div>
 
                     : this.state.visibleForm === "create" ? 
                 
                         <div style={styles.centerPage}> 
-                            <Create invokeHomeButton={this.homeButtonClicked} invokeSnackbar={this.snackbarOpen} />   
+                            <Create invokeStoreCreated={this.createStoreCompleted} invokeSnackbar={this.snackbarOpen} />   
                         </div>
                     
                     : null
-
                 }
                 <Snackbar open={this.state.snackOpen} autoHideDuration={6000} onClose={this.snackbarClose.bind(this)}>
                     <Alert onClose={this.snackbarClose.bind(this)} severity={this.state.snackSeverity}>
                         {this.state.snackMessage}
                     </Alert>
                 </Snackbar>
-
             </div>
         )
     }
