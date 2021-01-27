@@ -12,13 +12,31 @@ import MuiAlert from '@material-ui/lab/Alert'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
+import Paper from '@material-ui/core/Paper'
 
 import AddCircleOutlineOutlinedIcon from '@material-ui/icons/AddCircleOutlineOutlined'
 import HomeRoundedIcon from '@material-ui/icons/HomeRounded'
 
+import { MuiThemeProvider } from '@material-ui/core/styles';
+import { createMuiTheme } from "@material-ui/core/styles";
+
 function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />
 }
+
+const theme = createMuiTheme({
+
+    palette: {
+        type: "dark",
+        primary: {
+            main: "#ffffff"
+        },
+        purple: {
+            main: "#673ab7"
+        }
+    }
+
+})
 
 const CollectionName = "Stores"
 
@@ -46,15 +64,24 @@ const styles = {
         transform: "translate(-50%, -50%)",
         textAlign: "center"
     },
+    componentDimensionsPurple: {
+        width: 194,
+        height: 55,
+        backgroundColor: "#673ab7"
+    },
     componentDimensions: {
         width: 194,
-        height: 55
+        height: 55,
+    },
+    styleWhite: {
+        color: "white"
     },
     root: {
         flexGrow: 1,
     },
     menuButton: {
         marginRight: 2,
+        color: "white"
     },
       title: {
         flexGrow: 1,
@@ -155,6 +182,15 @@ class Home extends React.Component {
 
     createButtonClicked() {
 
+
+        // firebase.firestore().collection(CollectionName).where("capacity", ">", 30).get()
+        // .then((query) => {
+        //     if (query.data() !== undefined) { 
+        //     }
+        // })
+
+
+
         this.setState({ visibleForm: "create" })
 
     }
@@ -200,12 +236,13 @@ class Home extends React.Component {
 
         return(
 
+            <MuiThemeProvider theme={theme}>
             <div>
                 <div style={styles.root}>
-                    <AppBar position="static">
+                    <AppBar position="static" style={{backgroundColor: "#673ab7"}}>
                         <Toolbar>
                             <Typography variant="h6" style={styles.title}>
-                                Occupancy Counter
+                                <span style={styles.styleWhite}>Occupancy Counter</span>
                             </Typography>
 
                             {this.state.connectedTo !== "" ? 
@@ -237,10 +274,12 @@ class Home extends React.Component {
 
                 {this.state.visibleForm === "home" ?              
 
-                    <div style={styles.centerPage}>
+                    <Paper style={styles.centerPage}>
+                    {/* // <div style={styles.centerPage}> */}
                         <div style={{marginBottom: "10px"}}>
                             <TextField
                                 style={styles.componentDimensions}
+                                // inputProps={{ style: { borderColor: 'white'}}}
                                 error={!this.state.isValid}
                                 id="outlined-error"
                                 label="Enter Store Code"
@@ -253,21 +292,22 @@ class Home extends React.Component {
                             <Button 
                                 variant="contained" 
                                 color="primary" 
-                                style={styles.componentDimensions} 
+                                style={styles.componentDimensionsPurple} 
                                 onClick={this.connectButtonClicked.bind(this)}>
-                                Connect
+                                <span style={styles.styleWhite}>Connect</span>
                             </Button>    
                         </div>
-                    </div>
+                    </Paper>
+                    // </div>
 
                 : this.state.visibleForm === "counter" ?
                     <div style={{fontWeight: "bold"}}>
                         <div style={styles.topThird}>
                             <h3>
-                                <div>
+                                <div style={styles.styleWhite}>
                                     {this.state.connectedName} ({this.state.connectedTo})
                                 </div>
-                                <div>
+                                <div style={styles.styleWhite}>
                                     Capacity: {this.state.connectedCapacity}
                                 </div>
                             </h3>
@@ -294,6 +334,7 @@ class Home extends React.Component {
                     </Alert>
                 </Snackbar>
             </div>
+            </MuiThemeProvider>
         )
     }
 }

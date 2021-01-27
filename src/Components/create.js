@@ -9,10 +9,18 @@ const CollectionName = "Stores"
 
 const styles = {
 
+    componentDimensionsPurple: {
+        width: 194,
+        height: 55,
+        backgroundColor: "#673ab7"
+    },
     componentDimensions: {
         width: 194,
-        height: 55
-    }
+        height: 55,
+    },
+    styleWhite: {
+        color: "white"
+    },
 
 }
 
@@ -198,9 +206,9 @@ class Create extends React.Component {
                         <Button
                             variant="contained"
                             color="primary"
-                            style={styles.componentDimensions}
+                            style={styles.componentDimensionsPurple}
                             onClick={this.createButtonClicked.bind(this)}>
-                            Create
+                            <span style={styles.styleWhite}>Create</span>
                         </Button>
                     </Grid>
                 </Grid>
