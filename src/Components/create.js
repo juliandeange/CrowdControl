@@ -191,12 +191,10 @@ class Create extends React.Component {
                             label="Expiry Day"
                             type="date"
                             // defaultValue="2017-05-24"
-                            // defaultValue={new Date().getFullYear() + "-" + new Date().getMonth() + 1 + "-" + new Date().getDate()}
                             error={!this.state.storeExpiryDayValid}
                             value={this.state.expiryDay}
                             onChange={this.handleChange}
                             style={styles.componentDimensions}
-                            // style={{ width: 194, height: 55}}
                             InputLabelProps={{
                                 shrink: true,
                             }}
