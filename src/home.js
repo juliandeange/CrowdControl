@@ -231,28 +231,19 @@ class Home extends React.Component {
 
     deleteEntries() {
 
-        // var epochNow = Math.round(Date.now() / 1000)
-        // var test = new Date()
-
+        // Get expired stores
         firebase.firestore().collection(CollectionName).where("expiry", "<", new Date()).get()
-        // const path = new firebase.firestore.FieldPath("expiry", "seconds")
-        // firebase.firestore().collection(CollectionName).where(path, ">", 4)
+
         .then(
             function(query) {
-
-                // var now = new Date().getFullYear() + "-" + new Date().getMonth() + 1 + "-" + new Date().getDate()
-                
-
                 query.forEach(function(doc) {
-                    // doc.data() is never undefined for query doc snapshots
-                    console.log(doc.id, " => ", doc.data().expiry);
+
+                    // Delete expired stores
+                    firebase.firestore().collection(CollectionName).doc(doc.id).delete()
+                    console.log(doc.id);
                 });
             }
         )
-
-
-        // console.log(query)
-
     }
     
     render() {
