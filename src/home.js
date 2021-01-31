@@ -228,6 +228,32 @@ class Home extends React.Component {
         })
         
     }
+
+    deleteEntries() {
+
+        // var epochNow = Math.round(Date.now() / 1000)
+        // var test = new Date()
+
+        firebase.firestore().collection(CollectionName).where("expiry", "<", new Date()).get()
+        // const path = new firebase.firestore.FieldPath("expiry", "seconds")
+        // firebase.firestore().collection(CollectionName).where(path, ">", 4)
+        .then(
+            function(query) {
+
+                // var now = new Date().getFullYear() + "-" + new Date().getMonth() + 1 + "-" + new Date().getDate()
+                
+
+                query.forEach(function(doc) {
+                    // doc.data() is never undefined for query doc snapshots
+                    console.log(doc.id, " => ", doc.data().expiry);
+                });
+            }
+        )
+
+
+        // console.log(query)
+
+    }
     
     render() {
 
@@ -297,8 +323,16 @@ class Home extends React.Component {
                                 <span style={styles.styleWhite}>Connect</span>
                             </Button>    
                         </div>
+                        <div style={{marginTop: "10px"}}>       
+                            <Button 
+                                variant="contained" 
+                                color="primary" 
+                                style={styles.componentDimensionsPurple} 
+                                onClick={this.deleteEntries.bind(this)}>
+                                <span style={styles.styleWhite}>Delete</span>
+                            </Button>    
+                        </div>
                     </Paper>
-                    // </div>
 
                 : this.state.visibleForm === "counter" ?
                     <div style={{fontWeight: "bold"}}>
