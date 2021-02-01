@@ -119,7 +119,7 @@ class Home extends React.Component {
 
     componentDidMount() {
 
-        // this.deleteEntries()
+        this.deleteEntries()
 
     }
 
@@ -287,11 +287,9 @@ class Home extends React.Component {
                 {this.state.visibleForm === "home" ?              
 
                     <Paper style={styles.centerPage}>
-                    {/* // <div style={styles.centerPage}> */}
                         <div style={{marginBottom: "10px"}}>
                             <TextField
                                 style={styles.componentDimensions}
-                                // inputProps={{ style: { borderColor: 'white'}}}
                                 error={!this.state.isValid}
                                 id="outlined-error"
                                 label="Enter Store Code"
@@ -307,15 +305,6 @@ class Home extends React.Component {
                                 style={styles.componentDimensionsPurple} 
                                 onClick={this.connectButtonClicked.bind(this)}>
                                 <span style={styles.styleWhite}>Connect</span>
-                            </Button>    
-                        </div>
-                        <div style={{marginTop: "10px"}}>       
-                            <Button 
-                                variant="contained" 
-                                color="primary" 
-                                style={styles.componentDimensionsPurple} 
-                                onClick={this.deleteEntries.bind(this)}>
-                                <span style={styles.styleWhite}>Delete</span>
                             </Button>    
                         </div>
                     </Paper>
