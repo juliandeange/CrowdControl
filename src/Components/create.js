@@ -34,7 +34,9 @@ class Create extends React.Component {
             storeName: "",
             storeCode: "",
             storeCapacity: "",
-            expiryDay: new Date().getFullYear() + "-" + new Date().getMonth() + 1 + "-" + new Date().getDate(),
+            // expiryDay: new Date().getFullYear() + "-" + new Date().getMonth() + 1 + "-" + new Date().getDate(),
+            expiryDay: "",
+            currentDate: "",
 
             storeNameValid: true,
             storeCodeValid: true,
@@ -64,7 +66,7 @@ class Create extends React.Component {
         var date = new Date(dateArray[0], dateArray[1] - 1, dateArray[2])
 
         var today = new Date().getFullYear() + "-" + new Date().getMonth() + 1 + "-" + new Date().getDate()
-        if (this.state.expiryDay < today){
+        if (this.state.expiryDay < this.state.currentDate){
             expiry = false
         }
         date.setHours(23)
@@ -137,9 +139,21 @@ class Create extends React.Component {
 
         var currentDate = new Date();
         // eslint-disable-next-line
-        var dateString = currentDate.getFullYear() + "-" + currentDate.getMonth() + 1 + "-" + currentDate.getDate() + "T" + "23:59"
+        // var dateString = currentDate.getFullYear() + "-" + currentDate.getMonth() + 1 + "-" + currentDate.getDate() + "T" + "23:59"
 
-        this.setState({ expiry: dateString })
+        // this.setState({ expiry: dateString })
+
+
+        var year = currentDate.getFullYear()
+        var month = currentDate.getMonth() + 1
+        var date = currentDate.getDay()
+
+        var dateStr = year + "-" + (month <= 9 ? '0' + month : month) + '-' + (date <= 9 ? '0' + date : date)
+
+        // var r = new Date().getFullYear() + "-" + new Date().getMonth() + 1 + "-" + new Date().getDate()
+        this.setState({ expiryDay:  dateStr, currentDate: currentDate })
+
+
 
     }
 

@@ -117,6 +117,12 @@ class Home extends React.Component {
         }
     }
 
+    componentDidMount() {
+
+        // this.deleteEntries()
+
+    }
+
     storeCodeChanged = (e) => {
         this.setState({ 
             storeCode:  e.target.value.toUpperCase(),
@@ -182,15 +188,6 @@ class Home extends React.Component {
 
     createButtonClicked() {
 
-
-        // firebase.firestore().collection(CollectionName).where("capacity", ">", 30).get()
-        // .then((query) => {
-        //     if (query.data() !== undefined) { 
-        //     }
-        // })
-
-
-
         this.setState({ visibleForm: "create" })
 
     }
@@ -237,10 +234,8 @@ class Home extends React.Component {
         .then(
             function(query) {
                 query.forEach(function(doc) {
-
                     // Delete expired stores
-                    firebase.firestore().collection(CollectionName).doc(doc.id).delete()
-                    console.log(doc.id);
+                    doc.ref.delete()
                 });
             }
         )
