@@ -23,7 +23,6 @@ class Counter extends React.Component {
         super(props)
         this.state = {
 
-            // count: 0,
             
         }
     }
