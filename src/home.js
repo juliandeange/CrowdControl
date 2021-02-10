@@ -254,7 +254,7 @@ class Home extends React.Component {
                     <AppBar position="static" style={{backgroundColor: "#673ab7"}}>
                         <Toolbar>
                             <Typography variant="h6" style={styles.title}>
-                                <span style={styles.styleWhite}>Occupancy Counter</span>
+                                <span style={styles.styleWhite}>Crowd Control</span>
                             </Typography>
 
                             {this.state.connectedTo !== "" ? 

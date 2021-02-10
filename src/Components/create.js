@@ -64,7 +64,6 @@ class Create extends React.Component {
         var dateArray = this.state.expiryDay.split("-")
         var date = new Date(dateArray[0], dateArray[1] - 1, dateArray[2])
 
-        var today = new Date().getFullYear() + "-" + new Date().getMonth() + 1 + "-" + new Date().getDate()
         if (this.state.expiryDay < this.state.currentDate){
             expiry = false
         }
