@@ -36,6 +36,7 @@ class Create extends React.Component {
             storeCapacity: "",
             expiryDay: "",
             currentDate: "",
+            currentDateString: "",
 
             storeNameValid: true,
             storeCodeValid: true,
@@ -56,7 +57,11 @@ class Create extends React.Component {
 
         var dateStr = year + "-" + (month <= 9 ? '0' + month : month) + '-' + (date <= 9 ? '0' + date : date)
 
-        this.setState({ expiryDay:  dateStr, currentDate: currentDate })
+        this.setState({ 
+            expiryDay:  dateStr, 
+            currentDate: currentDate,
+            currentDateString: dateStr
+         })
 
     }
 
@@ -79,9 +84,10 @@ class Create extends React.Component {
         var dateArray = this.state.expiryDay.split("-")
         var date = new Date(dateArray[0], dateArray[1] - 1, dateArray[2])
 
-        if (this.state.expiryDay < this.state.currentDate){
+        if (this.state.expiryDay < this.state.currentDateString){
             expiry = false
         }
+        
         date.setHours(23)
         date.setMinutes(59)
 
