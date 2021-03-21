@@ -45,6 +45,21 @@ class Create extends React.Component {
         }
     }
 
+    componentDidMount() {
+
+        var currentDate = new Date();
+        // eslint-disable-next-line
+
+        var year = currentDate.getFullYear()
+        var month = currentDate.getMonth() + 1
+        var date = currentDate.getDate()
+
+        var dateStr = year + "-" + (month <= 9 ? '0' + month : month) + '-' + (date <= 9 ? '0' + date : date)
+
+        this.setState({ expiryDay:  dateStr, currentDate: currentDate })
+
+    }
+
     createButtonClicked() {
 
         var name = true
@@ -130,21 +145,6 @@ class Create extends React.Component {
             this.setState({ [event.target.name]: event.target.value.toUpperCase() })
         else
             this.setState({ [event.target.name]: event.target.value });
-
-    }
-    
-    componentDidMount() {
-
-        var currentDate = new Date();
-        // eslint-disable-next-line
-
-        var year = currentDate.getFullYear()
-        var month = currentDate.getMonth() + 1
-        var date = currentDate.getDay()
-
-        var dateStr = year + "-" + (month <= 9 ? '0' + month : month) + '-' + (date <= 9 ? '0' + date : date)
-
-        this.setState({ expiryDay:  dateStr, currentDate: currentDate })
 
     }
 
